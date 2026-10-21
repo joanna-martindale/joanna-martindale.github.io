@@ -134,6 +134,45 @@
     white-space: normal;
 }
 
+/* Alternate cards between the left and right sides of the central stem. */
+.interest-card.left {
+    align-self: flex-start;
+}
+
+.interest-card.right {
+    align-self: flex-end;
+}
+
+/* Draw a delicate horizontal branch from each left-hand card. */
+.interest-card.left::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 35px;
+    height: 1px;
+    background: rgba(209, 106, 131, 0.7);
+}
+
+/* Draw a delicate horizontal branch from each right-hand card. */
+.interest-card.right::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: 35px;
+    height: 1px;
+    background: rgba(209, 106, 131, 0.7);
+}
+
+/* Keep the branch lines visible behind the cards. */
+.interest-card.left,
+.interest-card.right {
+    z-index: 1;
+}
+
+    
+
 
 /* ==========================================
    DIMMED BACKGROUND OVERLAY
@@ -257,13 +296,20 @@
         min-height: 96px;
     }
 
-    /* Shorten the branches on narrow screens. */
-    .interest-card.left::after,
-    .interest-card.right::before {
-        right: 100%;
+   
+    /* Shorten the branches on narrow screens and keep them
+       connected to the central stem on the left. */
+    .interest-card.left::after {
         left: auto;
+        right: 100%;
         width: 20px;
     }
+
+    .interest-card.right::before {
+        right: 100%;
+        width: 20px;
+    }
+
 
     .interest-overlay {
         padding: 14px;
@@ -290,14 +336,7 @@
    interest cards to suggest a branching tree.
    The line is decorative, not a literal tree.
 =========================================== */
-.interest-tree::before {
-    content: "";
 
-    /* Positions the stem relative to the layout. */
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
 
     /* Keeps the stem delicate and centred. */
     width: 1px;
