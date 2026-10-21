@@ -14,6 +14,312 @@
 
   <!-- Use the same internal CSS as the homepage to keep the design consistent. -->
   <style>
+
+    
+/* ==========================================
+   INTERESTS PAGE LAYOUT
+=========================================== */
+.interests-page {
+    display: block; /* Overrides the general main grid layout. */
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 10px 28px 50px;
+    flex: 1;
+}
+
+/* Centre the introduction above the tree. */
+.interests-intro {
+    width: min(850px, 100%);
+    margin: 25px auto 35px;
+    padding: 0 28px;
+    text-align: center;
+}
+
+/* Style the small uppercase labels. */
+.section-eyebrow {
+    margin: 0 0 14px;
+    color: var(--olive-dark);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+/* Style the introductory paragraph. */
+.interests-intro > p:last-child {
+    max-width: 590px;
+    margin: 20px auto 0;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+/* ==========================================
+   TREE STEM AND CARD ARRANGEMENT
+=========================================== */
+.interest-tree {
+    position: relative; /* Anchors the central stem and branch lines. */
+    display: flex;
+    flex-direction: column;
+    gap: clamp(22px, 3vw, 34px);
+    padding: 12px 0;
+}
+
+/* Draw the delicate vertical stem behind the cards. */
+.interest-tree::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(183, 123, 139, 0.7) 8%,
+        rgba(183, 123, 139, 0.45) 90%,
+        transparent
+    );
+}
+
+/* Style each clickable interest card. */
+.interest-card {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+    width: calc(50% - 35px);
+    min-height: 105px;
+    padding: 19px 22px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: linear-gradient(135deg, #38242d, #252023);
+    color: var(--ink);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* Alternate cards between the left and right sides. */
+.interest-card.left {
+    align-self: flex-start;
+}
+
+.interest-card.right {
+    align-self: flex-end;
+}
+
+/* Connect left cards to the central stem. */
+.interest-card.left::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 35px;
+    height: 1px;
+    background: rgba(209, 106, 131, 0.7);
+}
+
+/* Connect right cards to the central stem. */
+.interest-card.right::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: 35px;
+    height: 1px;
+    background: rgba(209, 106, 131, 0.7);
+}
+
+/* Style the small number on each card. */
+.interest-number {
+    color: var(--olive-dark);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+
+/* Style the interest name. */
+.interest-name {
+    color: #f1b2c0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.35;
+}
+
+/* Style the prompt to explore each interest. */
+.interest-hint {
+    color: var(--muted);
+    font-size: 0.76rem;
+}
+
+/* Highlight cards on hover and keyboard focus. */
+.interest-card:hover,
+.interest-card:focus-visible {
+    transform: translateY(-3px);
+    border-color: var(--rose);
+    box-shadow: 0 8px 25px rgba(167, 71, 96, 0.2);
+}
+
+.interest-card:focus-visible {
+    outline: 2px solid var(--olive-dark);
+    outline-offset: 3px;
+}
+
+/* ==========================================
+   DIMMED BACKGROUND OVERLAY
+=========================================== */
+.interest-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(12, 9, 11, 0.75);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+/* JavaScript adds this class to show the overlay. */
+.interest-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* ==========================================
+   CENTRED FLOATING DESCRIPTION PANEL
+=========================================== */
+.interest-modal {
+    position: relative;
+    width: min(100%, 600px);
+    max-height: 82vh;
+    overflow-y: auto;
+    padding: clamp(28px, 5vw, 46px);
+    border: 1px solid rgba(209, 106, 131, 0.5);
+    border-radius: 8px;
+    background: linear-gradient(145deg, #2b1c24, #1d191c);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    transform: translateY(12px) scale(0.98);
+    transition: transform 0.25s ease;
+}
+
+/* Animate the panel into view. */
+.interest-overlay.is-open .interest-modal {
+    transform: translateY(0) scale(1);
+}
+
+/* Position the close button in the upper-right corner. */
+.interest-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.interest-close:hover,
+.interest-close:focus-visible {
+    color: var(--rose);
+}
+
+/* Style the selected interest's heading. */
+.interest-modal h2 {
+    margin: 0;
+    padding-right: 20px;
+    color: #f1b2c0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+/* Add a decorative divider below the title. */
+.modal-divider {
+    width: 58px;
+    height: 2px;
+    margin: 22px 0 26px;
+    background: linear-gradient(90deg, var(--rose), var(--olive));
+}
+
+/* Style the description headings. */
+.interest-modal h3 {
+    margin: 24px 0 9px;
+    color: var(--olive-dark);
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+/* Style the description text without changing its content. */
+.interest-modal p:not(.section-eyebrow) {
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+}
+
+/* ==========================================
+   RESPONSIVE MOBILE LAYOUT
+=========================================== */
+@media (max-width: 600px) {
+    .interests-page {
+        padding: 8px 22px 42px;
+    }
+
+    /* Move the central stem closer to the left edge. */
+    .interest-tree::before {
+        left: 8px;
+    }
+
+    /* Stack every card along the right side of the stem. */
+    .interest-card,
+    .interest-card.left,
+    .interest-card.right {
+        align-self: flex-end;
+        width: calc(100% - 28px);
+        min-height: 96px;
+    }
+
+    /* Shorten the branches on narrow screens. */
+    .interest-card.left::after,
+    .interest-card.right::before {
+        right: 100%;
+        left: auto;
+        width: 20px;
+    }
+
+    .interest-overlay {
+        padding: 14px;
+    }
+
+    .interest-modal {
+        max-height: 88vh;
+        padding: 32px 23px;
+    }
+}
+
+/* Respect the visitor's reduced-motion preference. */
+@media (prefers-reduced-motion: reduce) {
+    .interest-card,
+    .interest-overlay,
+    .interest-modal {
+        transition: none;
+    }
+}
+
 /* ==========================================
    CENTRAL STEM
    Creates a fine vertical line behind the
@@ -371,6 +677,100 @@ header {
     </p>
 
 </section>
+
+<!-- ==========================================
+     INTEREST TREE
+     Displays six clickable interests arranged
+     alternately on either side of a central stem.
+=========================================== -->
+<main class="interests-page">
+
+    <!-- Holds all six interest cards. -->
+    <section class="interest-tree" aria-label="My interests">
+
+        <!-- Interest 1: Design and visual culture. -->
+        <button type="button" class="interest-card left" data-interest="design">
+            <span class="interest-number">01</span>
+            <span class="interest-name">Design &amp; Visual Culture</span>
+            <span class="interest-hint">Explore interest ↗</span>
+        </button>
+
+        <!-- Interest 2: Psychology and human behaviour. -->
+        <button type="button" class="interest-card right" data-interest="psychology">
+            <span class="interest-number">02</span>
+            <span class="interest-name">Psychology &amp; Human Behaviour</span>
+            <span class="interest-hint">Explore interest ↗</span>
+        </button>
+
+        <!-- Interest 3: Writing and storytelling. -->
+        <button type="button" class="interest-card left" data-interest="writing">
+            <span class="interest-number">03</span>
+            <span class="interest-name">Writing &amp; Storytelling</span>
+            <span class="interest-hint">Explore interest ↗</span>
+        </button>
+
+        <!-- Interest 4: Nature and the environment. -->
+        <button type="button" class="interest-card right" data-interest="nature">
+            <span class="interest-number">04</span>
+            <span class="interest-name">Nature &amp; The Environment</span>
+            <span class="interest-hint">Explore interest ↗</span>
+        </button>
+
+        <!-- Interest 5: Lifelong learning. -->
+        <button type="button" class="interest-card left" data-interest="learning">
+            <span class="interest-number">05</span>
+            <span class="interest-name">Lifelong Learning</span>
+            <span class="interest-hint">Explore interest ↗</span>
+        </button>
+
+        <!-- Interest 6: Photography and observation. -->
+        <button type="button" class="interest-card right" data-interest="photography">
+            <span class="interest-number">06</span>
+            <span class="interest-name">Photography &amp; Observation</span>
+            <span class="interest-hint">Explore interest ↗</span>
+        </button>
+
+    </section>
+</main>
+
+<!-- ==========================================
+     FLOATING INTEREST DESCRIPTION
+     JavaScript fills this panel when a card
+     is clicked. The overlay dims the background.
+=========================================== -->
+<div class="interest-overlay" id="interestOverlay" aria-hidden="true">
+
+    <!-- The centred description panel. -->
+    <section class="interest-modal"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="modalTitle">
+
+        <!-- Closes the description panel. -->
+        <button type="button"
+                class="interest-close"
+                id="closeInterest"
+                aria-label="Close description">&times;</button>
+
+        <!-- Small decorative label. -->
+        <p class="section-eyebrow">A CLOSER LOOK</p>
+
+        <!-- JavaScript inserts the selected interest's title here. -->
+        <h2 id="modalTitle">Interest</h2>
+
+        <!-- Decorative line beneath the title. -->
+        <div class="modal-divider"></div>
+
+        <!-- First description section. -->
+        <h3>Why I like it / what fascinates me</h3>
+        <p id="modalWhy"></p>
+
+        <!-- Second description section. -->
+        <h3>How I am exploring it</h3>
+        <p id="modalHow"></p>
+
+    </section>
+</div>
 
   <!-- Keep the same footer on every page. -->
   <footer>Made with care · A work in progress</footer>
