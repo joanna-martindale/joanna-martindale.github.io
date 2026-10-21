@@ -14,7 +14,34 @@
 
   <!-- Use the same internal CSS as the homepage to keep the design consistent. -->
   <style>
+/* ==========================================
+   CENTRAL STEM
+   Creates a fine vertical line behind the
+   interest cards to suggest a branching tree.
+   The line is decorative, not a literal tree.
+=========================================== */
+.interest-tree::before {
+    content: "";
 
+    /* Positions the stem relative to the layout. */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+
+    /* Keeps the stem delicate and centred. */
+    width: 1px;
+    transform: translateX(-50%);
+
+    /* Fades the line at both ends for a softer look. */
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(183, 123, 139, 0.7) 8%,
+        rgba(183, 123, 139, 0.45) 90%,
+        transparent
+    );
+}
     
 /* TOP NAVIGATION TABS */
 header {
@@ -324,26 +351,242 @@ header {
   </header>
 
   <!-- Main content area for this section. -->
-  <main>
-    <!-- Reuse the hero panel style for a consistent layout. -->
-    <section class="hero" aria-labelledby="page-title">
-      <!-- Label the section number above the title. -->
-      <p class="eyebrow">Section 3</p>
-      <!-- Name this placeholder page. -->
-      <h1 id="page-title">Page 3</h1>
-      <!-- Decorative gradient divider. -->
-      <div class="accent-line" aria-hidden="true"></div>
-      <!-- Placeholder copy to replace when this section is developed. -->
-      <p class="intro">
-        This is a placeholder for Page 3. We can build this section out
-        with your own content, features and ideas whenever you're ready.
-      </p>
-      <!-- Provide a clear route back to the homepage. -->
-      <a class="back-link" href="index.html">← Back to home</a>
-    </section>
-  </main>
+  <!-- ==========================================
+     INTERESTS PAGE INTRODUCTION
+     Displays the page heading and a short
+     introduction above the branching layout.
+=========================================== -->
+<section class="interests-intro">
+
+    <!-- Small decorative label above the heading. -->
+    <p class="section-eyebrow">A GROWING COLLECTION</p>
+
+    <!-- Main heading for the interests page. -->
+    <h1>Interests & Creative Pursuits</h1>
+
+    <!-- Brief explanation of what the page contains. -->
+    <p>
+        A collection of subjects, ideas and experiences
+        that spark my curiosity and inspire me to explore.
+    </p>
+
+</section>
 
   <!-- Keep the same footer on every page. -->
   <footer>Made with care · A work in progress</footer>
+
+
+<!-- ==========================================
+     INTERESTS PAGE JAVASCRIPT
+     Controls the interest descriptions and
+     the floating modal on Page3.html.
+=========================================== -->
+<script>
+
+/* ==========================================
+   1. INTEREST DETAILS
+   Stores the title and two descriptions for
+   each interest. The keys (design, psychology,
+   etc.) must match the data-interest attributes
+   on the corresponding HTML interest cards.
+=========================================== */
+const interestDetails = {
+
+    // Details displayed when the Design interest is selected.
+    design: {
+        title: "Design & Visual Culture",
+        // Explains why this interest is fascinating.
+        why: "I am fascinated by how colour, typography, layout and visual details influence the way people experience information. I enjoy noticing the thought behind everyday objects, spaces and digital interfaces.",
+        // Explains how this interest is being explored.
+        how: "I am exploring this interest by collecting visual inspiration, experimenting with layouts and colour palettes, and paying closer attention to design choices in websites, exhibitions and publications."
+    },
+
+    // Details displayed when the Psychology interest is selected.
+    psychology: {
+        title: "Psychology & Human Behaviour",
+        why: "I find it interesting that people can experience the same situation in very different ways. I am curious about how emotions, habits, environments and social interactions shape our decisions.",
+        how: "I am exploring this through reading introductory psychology books, listening to educational discussions and reflecting on how behavioural concepts appear in everyday life."
+    },
+
+    // Details displayed when the Writing interest is selected.
+    writing: {
+        title: "Writing & Storytelling",
+        why: "I enjoy how words can communicate complex ideas, create atmosphere and help people connect with experiences beyond their own. I am especially interested in the relationship between language, structure and meaning.",
+        how: "I am developing this interest by keeping notes, writing short reflections and experimenting with different ways of presenting ideas clearly and creatively."
+    },
+
+    // Details displayed when the Nature interest is selected.
+    nature: {
+        title: "Nature & The Environment",
+        why: "I am fascinated by the interconnectedness of natural systems and the small details that are easy to overlook. I enjoy thinking about how human activity influences the world around us.",
+        how: "I am exploring this through walks, nature photography, reading about environmental issues and learning more about sustainable approaches to everyday living."
+    },
+
+    // Details displayed when the Lifelong Learning interest is selected.
+    learning: {
+        title: "Lifelong Learning",
+        why: "I enjoy the feeling of discovering something that changes how I understand a subject. Exploring unfamiliar topics encourages me to ask better questions and make connections between different areas of knowledge.",
+        how: "I am exploring this by following my curiosity, taking short online courses, keeping a list of subjects to investigate and making time for independent learning."
+    },
+
+    // Details displayed when the Photography interest is selected.
+    photography: {
+        title: "Photography & Observation",
+        why: "I like how photography encourages me to slow down and notice details, patterns, light and perspective. It offers a way to capture moments and see familiar surroundings differently.",
+        how: "I am exploring this by taking photographs during everyday outings, experimenting with composition and light, and gradually developing my own visual style."
+    }
+};
+
+
+/* ==========================================
+   2. CONNECT TO THE HTML ELEMENTS
+   Finds the modal, its close button and the
+   elements where the selected interest's
+   title and descriptions will appear.
+=========================================== */
+
+// The full-screen overlay behind the floating description box.
+const overlay = document.getElementById("interestOverlay");
+
+// The button that closes the description box.
+const closeButton = document.getElementById("closeInterest");
+
+// The heading that displays the selected interest's title.
+const modalTitle = document.getElementById("modalTitle");
+
+// The paragraph that displays why the interest is fascinating.
+const modalWhy = document.getElementById("modalWhy");
+
+// The paragraph that displays how the interest is being explored.
+const modalHow = document.getElementById("modalHow");
+
+// Remembers which element was focused before the modal opened.
+// This allows keyboard focus to return to that element when closed.
+let previousFocus = null;
+
+
+/* ==========================================
+   3. OPEN AN INTEREST DESCRIPTION
+   Receives the selected interest's key and
+   displays its information in the modal.
+=========================================== */
+function openInterest(key) {
+
+    // Retrieve the details that match the selected interest key.
+    const interest = interestDetails[key];
+
+    // Stop the function if no matching interest was found.
+    if (!interest) return;
+
+    // Remember the currently focused element, usually the clicked card.
+    previousFocus = document.activeElement;
+
+    // Update the modal heading and both description paragraphs.
+    // textContent inserts plain text rather than interpreting HTML.
+    modalTitle.textContent = interest.title;
+    modalWhy.textContent = interest.why;
+    modalHow.textContent = interest.how;
+
+    // Add the CSS class that makes the modal visible.
+    overlay.classList.add("is-open");
+
+    // Update the accessibility attribute to indicate that
+    // the overlay is now visible to assistive technologies.
+    overlay.setAttribute("aria-hidden", "false");
+
+    // Prevent the page behind the modal from scrolling while it is open.
+    document.body.style.overflow = "hidden";
+
+    // Move keyboard focus to the close button for easier navigation.
+    closeButton.focus();
+}
+
+
+/* ==========================================
+   4. CLOSE THE INTEREST DESCRIPTION
+   Hides the modal, restores page scrolling
+   and returns keyboard focus to the previous
+   element when possible.
+=========================================== */
+function closeInterest() {
+
+    // Remove the CSS class that makes the modal visible.
+    overlay.classList.remove("is-open");
+
+    // Mark the hidden overlay as unavailable to assistive technologies.
+    overlay.setAttribute("aria-hidden", "true");
+
+    // Restore the page's normal scrolling behaviour.
+    document.body.style.overflow = "";
+
+    // Return focus to the element that was selected before the modal opened.
+    if (previousFocus) {
+        previousFocus.focus();
+    }
+}
+
+
+/* ==========================================
+   5. HANDLE INTEREST CARD CLICKS
+   Finds every element with the interest-card
+   class and adds a click listener to it.
+=========================================== */
+document.querySelectorAll(".interest-card").forEach(card => {
+
+    // Run this function whenever the current card is clicked.
+    card.addEventListener("click", () => {
+
+        // Read the card's data-interest attribute.
+        // For example, data-interest="design" passes the key "design".
+        // That key is used to retrieve the correct description above.
+        openInterest(card.dataset.interest);
+    });
+});
+
+
+/* ==========================================
+   6. HANDLE THE CLOSE BUTTON
+   Closes the modal when the user clicks
+   the × button inside the description box.
+=========================================== */
+closeButton.addEventListener("click", closeInterest);
+
+
+/* ==========================================
+   7. CLOSE WHEN CLICKING OUTSIDE THE BOX
+   Clicking the darkened overlay closes the
+   modal. Clicking inside the description box
+   does not trigger this behaviour.
+=========================================== */
+overlay.addEventListener("click", event => {
+
+    // event.target is the exact element that received the click.
+    // Only close when that element is the overlay itself.
+    if (event.target === overlay) {
+        closeInterest();
+    }
+});
+
+
+/* ==========================================
+   8. CLOSE USING THE ESCAPE KEY
+   Allows keyboard users to close the modal
+   without needing to click the close button.
+=========================================== */
+document.addEventListener("keydown", event => {
+
+    // Check that the pressed key is Escape and that
+    // the modal is currently open before closing it.
+    if (
+        event.key === "Escape" &&
+        overlay.classList.contains("is-open")
+    ) {
+        closeInterest();
+    }
+});
+
+</script>
+
+  
 </body>
 </html>
