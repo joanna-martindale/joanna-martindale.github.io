@@ -84,102 +84,56 @@
     );
 }
 
-/* Style each clickable interest card. */
+
+/* Style each clickable interest card and keep its text within the leaf. */
 .interest-card {
-    /* Keep text neetly inside the 'leaf' shape */
     box-sizing: border-box;
-    min-width: 0;
-    max-width: 100%;
-    padding: 16px 24px;
-    text-align: center;
-    overflow-wrap: break-word;
-    word-break: normal;
-    white-space: normal;
-  
     position: relative;
     z-index: 1;
+
+    /* Arrange the number, interest name and hint vertically. */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 7px;
+
+    /* Keep the card responsive and allow its height to grow if needed. */
     width: calc(50% - 35px);
+    min-width: 0;
     min-height: 105px;
     padding: 19px 22px;
+
+    /* Preserve the existing leaf appearance. */
     border: 1px solid var(--line);
     border-radius: 5px;
     background: linear-gradient(135deg, #38242d, #252023);
     color: var(--ink);
     font: inherit;
-    text-align: left;
+    text-align: center;
     cursor: pointer;
+
+    /* Prevent long words from extending outside the card. */
+    overflow-wrap: anywhere;
+    white-space: normal;
+
+    /* Animate hover changes smoothly. */
     transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-/* Alternate cards between the left and right sides. */
-.interest-card.left {
-    align-self: flex-start;
-}
-
-.interest-card.right {
-    align-self: flex-end;
-}
-
-/* Connect left cards to the central stem. */
-.interest-card.left::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    width: 35px;
-    height: 1px;
-    background: rgba(209, 106, 131, 0.7);
-}
-
-/* Connect right cards to the central stem. */
-.interest-card.right::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 100%;
-    width: 35px;
-    height: 1px;
-    background: rgba(209, 106, 131, 0.7);
-}
-
-/* Style the small number on each card. */
-.interest-number {
-    color: var(--olive-dark);
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-}
-
-/* Style the interest name. */
+/* Allow long interest names to wrap onto multiple lines. */
 .interest-name {
+    display: block;
+    width: 100%;
+    min-width: 0;
     color: #f1b2c0;
     font-family: Georgia, "Times New Roman", serif;
     font-size: clamp(1rem, 2vw, 1.25rem);
     line-height: 1.35;
+    overflow-wrap: anywhere;
+    white-space: normal;
 }
 
-/* Style the prompt to explore each interest. */
-.interest-hint {
-    color: var(--muted);
-    font-size: 0.76rem;
-}
-
-/* Highlight cards on hover and keyboard focus. */
-.interest-card:hover,
-.interest-card:focus-visible {
-    transform: translateY(-3px);
-    border-color: var(--rose);
-    box-shadow: 0 8px 25px rgba(167, 71, 96, 0.2);
-}
-
-.interest-card:focus-visible {
-    outline: 2px solid var(--olive-dark);
-    outline-offset: 3px;
-}
 
 /* ==========================================
    DIMMED BACKGROUND OVERLAY
