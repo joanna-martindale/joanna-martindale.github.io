@@ -431,6 +431,17 @@ header {
       }
     }
 
+/* Contact page layout override */
+main.contact-page {
+    width: 100%;
+    max-width: 90rem;
+    margin: 0 auto;
+    padding: clamp(1rem, 4vw, 3rem);
+    flex: 1;
+    display: block;
+    box-sizing: border-box;
+}
+
   </style>
 </head>
 <body>
@@ -448,14 +459,15 @@ header {
       <a href = "Page1.html">About Me</a>
       <a href = "Page2.html">Experience</a>
       <a href = "Page3.html">Interests and Creative Pursuits</a>
-      <a href = "Page4.html">Contact</a>
+      <a href = "Page4.html" class = "active" aria-current = "page">Contact</a>
+      <!--Creates contact tab in nav bar and marks it as the page currently being visited-->
       <a href = "C:\Users\joann\Downloads\Joanna Personal Website\personal-website-dark-commented\Joanna_Martindale_CV (2).pdf" target = "_blank" rel = "noopener noreferrer">CV</a>
       <!--target="_blank" opens the cv in a separate tab and rel=...noreferrer adds a security and privac safeguard and href="CV..." points to file path of my CV-->
 
 
     </nav>
 
-    <span class="header-note">Page 4 · More coming soon</span>
+    <span class="header-note">Let's get in touch</span>
   </header>
 
   <!-- Main content area for this section. -->
@@ -541,23 +553,7 @@ header {
 </main>
 
     
-    <!-- Reuse the hero panel style for a consistent layout. -->
-    <section class="hero" aria-labelledby="page-title">
-      <!-- Label the section number above the title. -->
-      <p class="eyebrow">Section 4</p>
-      <!-- Name this placeholder page. -->
-      <h1 id="page-title">Page 4</h1>
-      <!-- Decorative gradient divider. -->
-      <div class="accent-line" aria-hidden="true"></div>
-      <!-- Placeholder copy to replace when this section is developed. -->
-      <p class="intro">
-        This is a placeholder for Page 4. We can build this section out
-        with your own content, features and ideas whenever you're ready.
-      </p>
-      <!-- Provide a clear route back to the homepage. -->
-      <a class="back-link" href="index.html">← Back to home</a>
-    </section>
-  </main>
+    
 
   <!-- Keep the same footer on every page. -->
   <footer>Made with care · A work in progress</footer>
