@@ -171,7 +171,21 @@
     z-index: 1;
 }
 
-    
+ 
+/* Highlight interest cards when hovered over or selected with a keyboard. */
+.interest-card:hover,
+.interest-card:focus-visible {
+    transform: translateY(-3px);
+    border-color: var(--rose);
+    box-shadow: 0 8px 25px rgba(167, 71, 96, 0.2);
+}
+
+/* Make keyboard focus clearly visible for accessibility. */
+.interest-card:focus-visible {
+    outline: 2px solid var(--olive-dark);
+    outline-offset: 3px;
+}
+   
 
 
 /* ==========================================
@@ -297,18 +311,16 @@
     }
 
    
-    /* Shorten the branches on narrow screens and keep them
-       connected to the central stem on the left. */
-    .interest-card.left::after {
+    
+    /* On mobile, all cards sit to the right of the stem.
+       Keep each short branch connected to the central line. */
+    .interest-card.left::after,
+    .interest-card.right::before {
         left: auto;
         right: 100%;
         width: 20px;
     }
 
-    .interest-card.right::before {
-        right: 100%;
-        width: 20px;
-    }
 
 
     .interest-overlay {
@@ -338,19 +350,7 @@
 =========================================== */
 
 
-    /* Keeps the stem delicate and centred. */
-    width: 1px;
-    transform: translateX(-50%);
-
-    /* Fades the line at both ends for a softer look. */
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        rgba(183, 123, 139, 0.7) 8%,
-        rgba(183, 123, 139, 0.45) 90%,
-        transparent
-    );
-}
+    
     
 /* TOP NAVIGATION TABS */
 header {
