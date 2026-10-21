@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<!-- Tell the browser to use modern HTML5 rules. -->
+<html lang="en">
+<head>
+  <!-- Use UTF-8 so punctuation and symbols display correctly. -->
+  <meta charset="UTF-8">
+  <!-- Keep the layout responsive on phones and tablets. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Summarise the page for browsers and search engines. -->
+  <meta name="description" content="About Joanna Martindale, STEAM enthusiast and gap year student.">
+  <!-- Set the title shown in the browser tab. -->
+  <title>About Me | Joanna Martindale</title>
+
+  <!-- All styling is kept inside this file, so no separate CSS file is needed. -->
+  <style>
+
+  /* TOP NAVIGATION TABS */
+
+  header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+  }
+
+.page-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+.page-tabs a {
+    display: inline-block;
+    padding: 10px 15px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    transition: background 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
+}
+
+.page-tabs a:hover {
+    color: var(--ink);
+    background: var(--panel);
+    border-color: var(--rose);
+}
+
+/* Highlight the page currently being viewed */
+.page-tabs a.active,
+.page-tabs a[aria-current="page"] {
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--burgundy), var(--rose));
+    border-color: var(--rose);
+    box-shadow: 0 4px 14px rgba(167, 71, 96, 0.25);
+}
+
+@media (max-width: 700px) {
+    .page-tabs {
+        justify-content: flex-start;
+        width: 100%;
+        margin-left: 0;
+        gap: 6px;
+    }
+
+    .page-tabs a {
+        padding: 8px 10px;
+        font-size: 0.82rem;
+    }
+}
+
+
+
+
+    /* Store the site's palette in variables so colours are easy to change. */
+    :root {
+      --burgundy: #a74760;       /* Main burgundy-rose accent. */
+      --rose: #d16a83;           /* Brighter rose for gradients and highlights. */
+      --pink: #f1b2c0;           /* Light pink for headings. */
+      --olive: #899064;          /* Muted olive green accent. */
+      --olive-light: #c0c79a;    /* Pale olive for readable text and details. */
+      --background: #171316;     /* Main near-black background. */
+      --panel: #21191e;          /* Slightly lighter panel colour. */
+      --ink: #f7edf0;            /* Main text colour. */
+      --muted: #c1adb4;           /* Secondary paragraph colour. */
+      --line: #54333e;            /* Subtle border colour. */
+    }
+
+    /* Include padding and borders inside element widths. */
+    * { box-sizing: border-box; }
+
+    /* Set the page's base type, colours and layered background. */
+    body {
+      margin: 0; /* Remove the browser's default page margin. */
+      min-height: 100vh; /* Make the page at least as tall as the screen. */
+      font-family: "Segoe UI", Arial, sans-serif; /* Use a clean sans-serif body font. */
+      color: var(--ink); /* Apply the default text colour. */
+      background:
+        radial-gradient(ellipse at 12% 12%, rgba(167, 71, 96, .22), transparent 38%), /* Add a soft burgundy glow. */
+        radial-gradient(ellipse at 88% 88%, rgba(137, 144, 100, .16), transparent 40%), /* Add a soft olive glow. */
+        linear-gradient(135deg, #171316 0%, #21181e 52%, #1b1e17 100%); /* Blend the dark background colours. */
+    }
+
+    /* Keep the header aligned with the main content rather than the screen edges. */
+    .site-header {
+      width: min(1180px, calc(100% - 56px)); /* Limit width and leave side margins. */
+      margin: 0 auto; /* Centre the header. */
+      padding: 28px 0; /* Add vertical breathing room. */
+      display: flex; /* Place the site name and note on one row. */
+      align-items: center; /* Align them vertically. */
+      justify-content: space-between; /* Push them to opposite sides. */
+      gap: 20px; /* Leave room if the row wraps. */
+    }
+
+    /* Style the site wordmark as a small, letter-spaced link. */
+    .brand {
+      color: var(--rose); /* Use the rose accent. */
+      font-size: .82rem; /* Keep the wordmark compact. */
+      font-weight: 800; /* Make the wordmark bold. */
+      letter-spacing: .16em; /* Add a little space between letters. */
+      text-transform: uppercase; /* Display the wordmark in uppercase. */
+      text-decoration: none; /* Remove the default underline. */
+    }
+
+    /* Style the small note at the other end of the header. */
+    .header-note { color: var(--muted); font-size: .88rem; }
+
+    /* Centre the main layout and keep it comfortably inset from the screen edges. */
+    main {
+      width: min(1180px, calc(100% - 56px)); /* Use a wide but controlled content area. */
+      margin: 0 auto; /* Centre the main content. */
+      padding: clamp(38px, 7vw, 88px) 0 76px; /* Scale vertical spacing with the screen. */
+    }
+
+    /* Arrange the introduction and image side by side on desktop. */
+    .about-layout {
+      display: grid; /* Use a grid for the two-column hero. */
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); /* Give the text a little more room. */
+      align-items: center; /* Vertically align the image and text. */
+      gap: clamp(36px, 7vw, 90px); /* Leave generous space between the columns. */
+    }
+
+    /* Give the text column a gentle entrance animation. */
+    .about-copy { animation: rise-in .8s ease both; }
+
+    /* Style the small uppercase introduction above the heading. */
+    .eyebrow {
+      margin: 0 0 18px; /* Separate the label from the title. */
+      color: var(--olive-light); /* Use a light olive accent. */
+      font-size: .78rem; /* Keep the label smaller than the title. */
+      font-weight: 800; /* Make the label easy to notice. */
+      letter-spacing: .2em; /* Spread out the letters. */
+      text-transform: uppercase; /* Use uppercase for an editorial feel. */
+    }
+
+    /* Make the name the visual focus of the page. */
+    h1 {
+      margin: 0; /* Control spacing explicitly. */
+      color: var(--pink); /* Use soft pink for the main heading. */
+      font-family: Georgia, "Times New Roman", serif; /* Add contrast with the body font. */
+      font-size: clamp(2.8rem, 6.6vw, 5.6rem); /* Scale the heading for different screens. */
+      font-weight: 500; /* Keep the title elegant rather than too heavy. */
+      line-height: 1.02; /* Keep the title compact if it wraps. */
+      letter-spacing: -.05em; /* Slightly tighten the heading. */
+    }
+
+    /* Style the subtitle underneath the name. */
+    .subtitle {
+      margin: 20px 0 0; /* Add space above the subtitle. */
+      color: var(--olive-light); /* Use olive to complement the pink heading. */
+      font-size: clamp(1rem, 2vw, 1.2rem); /* Scale the subtitle gently. */
+      font-weight: 650; /* Give the subtitle enough emphasis. */
+      letter-spacing: .015em; /* Add a subtle amount of tracking. */
+    }
+
+    /* Add a short gradient line to break up the text visually. */
+    .accent-line {
+      width: 72px; /* Set the accent line width. */
+      height: 3px; /* Keep the line slim. */
+      margin: 28px 0; /* Add vertical spacing without centring it. */
+      background: linear-gradient(90deg, var(--rose), #e6a9b6, var(--olive)); /* Blend the palette. */
+    }
+
+    /* Keep the biography readable and easy to replace in the HTML. */
+    .bio {
+      max-width: 600px; /* Prevent very long lines of text. */
+      margin: 0; /* Align the paragraph with the heading. */
+      color: var(--muted); /* Use the softer paragraph colour. */
+      font-size: 1.04rem; /* Set comfortable body text size. */
+      line-height: 1.85; /* Give each line breathing room. */
+    }
+
+    /* Arrange the achievement cards in a flexible row. */
+    .stats {
+      display: grid; /* Use a grid so each achievement aligns neatly. */
+      grid-template-columns: repeat(3, minmax(0, 1fr)); /* Create three equal columns. */
+      gap: 12px; /* Leave a small gap between cards. */
+      margin-top: 38px; /* Separate the stats from the biography. */
+      max-width: 720px; /* Stop the stat row from growing too wide. */
+    }
+
+    /* Style each achievement with a restrained glowing edge. */
+    .stat {
+      min-height: 112px; /* Keep the cards a consistent height. */
+      padding: 18px 16px; /* Add space around the content. */
+      border: 1px solid rgba(209, 106, 131, .42); /* Outline the card in muted rose. */
+      border-radius: 3px; /* Keep corners nearly square. */
+      background: linear-gradient(145deg, rgba(57, 37, 46, .86), rgba(34, 31, 30, .92)); /* Add a dark tinted gradient. */
+      box-shadow: 0 0 24px rgba(209, 106, 131, .10), inset 0 0 18px rgba(209, 106, 131, .035); /* Create a soft glow. */
+      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; /* Animate hover changes smoothly. */
+    }
+
+    /* Slightly lift achievement cards when hovered or focused. */
+    .stat:hover {
+      transform: translateY(-4px); /* Lift the card a little. */
+      border-color: var(--rose); /* Brighten its outline. */
+      box-shadow: 0 0 28px rgba(209, 106, 131, .18); /* Increase the rose aura. */
+    }
+
+    /* Emphasise the achievement's main number or grade. */
+    .stat-value {
+      display: block; /* Put the value on its own line. */
+      margin-bottom: 9px; /* Separate it from the explanatory label. */
+      color: var(--pink); /* Highlight the value in pink. */
+      font-size: clamp(1.3rem, 2.4vw, 1.8rem); /* Scale the value responsively. */
+      font-weight: 800; /* Make the result stand out. */
+      line-height: 1.1; /* Keep the value compact. */
+    }
+
+    /* Keep the supporting achievement text readable at small sizes. */
+    .stat-label { color: var(--muted); font-size: .83rem; line-height: 1.45; }
+
+    /* Reserve a space on the right for a future photo or illustration. */
+    .image-frame {
+      position: relative; /* Allow the decorative frame to sit behind the placeholder. */
+      min-height: 470px; /* Give the image area a substantial portrait shape. */
+      display: grid; /* Centre the placeholder content. */
+      place-items: center; /* Align the placeholder in both directions. */
+      padding: 28px; /* Keep the placeholder text away from the frame edges. */
+      border: 1px solid rgba(209, 106, 131, .42); /* Outline the image area in rose. */
+      border-radius: 3px; /* Keep the design's edges sharp. */
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(209, 106, 131, .18), transparent 58%), /* Add a pink glow behind the future image. */
+        linear-gradient(145deg, rgba(54, 36, 44, .88), rgba(30, 31, 26, .94)); /* Use a dark burgundy-olive gradient. */
+      box-shadow: 0 0 42px rgba(167, 71, 96, .12); /* Give the frame a soft aura. */
+      animation: rise-in .9s .12s ease both; /* Fade the image area in slightly after the text. */
+    }
+
+    /* Add a thin inset border as a decorative frame detail. */
+    .image-frame::before {
+      content: ""; /* Create a decorative pseudo-element with no text. */
+      position: absolute; /* Position it within the image frame. */
+      inset: 14px; /* Keep the border inset from the outer edge. */
+      border: 1px solid rgba(192, 199, 154, .25); /* Use a faint olive border. */
+      pointer-events: none; /* Let clicks pass through the decoration. */
+    }
+
+    /* Style the image placeholder label until a real image is added. */
+    .image-placeholder {
+      max-width: 260px; /* Keep the placeholder message narrow. */
+      color: var(--muted); /* Use secondary text styling. */
+      text-align: center; /* Centre the icon and instructions. */
+      line-height: 1.7; /* Make the instructions easy to read. */
+    }
+
+    /* Display a simple camera-like icon without needing an image file. */
+    .placeholder-icon {
+      display: block; /* Put the icon on its own line. */
+      margin-bottom: 18px; /* Add space below the icon. */
+      color: var(--olive-light); /* Use pale olive for the icon. */
+      font-size: 2.8rem; /* Make the icon prominent. */
+    }
+
+    /* Style the link back to the homepage. */
+    .back-link {
+      display: inline-flex; /* Let the link fit its content. */
+      margin-top: 34px; /* Separate it from the achievements. */
+      padding: 12px 18px; /* Give it a comfortable click area. */
+      border: 1px solid rgba(209, 106, 131, .65); /* Outline the link in rose. */
+      border-radius: 3px; /* Keep the corners sharp. */
+      background: linear-gradient(120deg, rgba(72, 37, 50, .88), rgba(48, 39, 42, .88)); /* Add a subtle gradient. */
+      color: #f5c6d1; /* Use pale pink for the label. */
+      font-size: .92rem; /* Keep the link slightly smaller than body copy. */
+      font-weight: 700; /* Make the link clear. */
+      text-decoration: none; /* Remove the default underline. */
+      box-shadow: 0 0 22px rgba(209, 106, 131, .08); /* Add a restrained glow. */
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; /* Animate hover feedback. */
+    }
+
+    /* Add a small hover effect to the homepage link. */
+    .back-link:hover { transform: translateY(-2px); border-color: var(--olive-light); box-shadow: 0 0 24px rgba(209, 106, 131, .15); }
+
+    /* Make keyboard navigation clearly visible. */
+    a:focus-visible { outline: 2px solid var(--olive-light); outline-offset: 4px; }
+
+    /* Keep the footer subtle and aligned with the main content width. */
+    footer {
+      width: min(1180px, calc(100% - 56px)); /* Match the content's side margins. */
+      margin: 0 auto; /* Centre the footer. */
+      padding: 20px 0 28px; /* Add breathing room. */
+      color: var(--muted); /* Use secondary text colour. */
+      font-size: .82rem; /* Keep the footer unobtrusive. */
+      text-align: center; /* Centre the footer message. */
+    }
+    /* ==========================================
+       EXPERIENCE SECTION — STACKED OBLONG CARDS
+       ========================================== */
+
+    /* Give the Experience section space above and below it. */
+    .experience-section {
+      margin-top: clamp(90px, 12vw, 150px);
+      padding: 30px 0 70px;
+      scroll-margin-top: 30px;
+    }
+
+    /* Centre the Experience heading above the stack. */
+    .experience-heading {
+      margin: 0 0 14px;
+      color: var(--pink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 500;
+      letter-spacing: -.035em;
+      text-align: center;
+    }
+
+    /* Add a short gradient accent underneath the heading. */
+    .experience-heading-line {
+      width: 76px;
+      height: 3px;
+      margin: 0 auto 42px;
+      background: linear-gradient(90deg, var(--rose), #e6a9b6, var(--olive));
+    }
+
+    /* Keep the stack centred and narrower than the full page. */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: min(820px, 100%);
+      margin: 0 auto;
+    }
+
+    /* Style each experience as a clickable horizontal oblong. */
+    .experience-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      width: 100%;
+      min-height: 92px;
+      padding: 22px 30px;
+      border: 1px solid rgba(209, 106, 131, .45);
+      border-radius: 999px;
+      background:
+        linear-gradient(110deg, rgba(72, 37, 50, .94), rgba(37, 34, 33, .96));
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      box-shadow:
+        0 0 24px rgba(209, 106, 131, .08),
+        inset 0 0 18px rgba(209, 106, 131, .025);
+      transition:
+        opacity .45s ease,
+        transform .45s ease,
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+    }
+
+    /* Brighten and lift the oblong when a visitor points at it. */
+    .experience-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--pink);
+      background:
+        linear-gradient(110deg, rgba(91, 43, 60, .98), rgba(43, 42, 34, .98));
+      box-shadow:
+        0 0 30px rgba(209, 106, 131, .18),
+        0 0 14px rgba(137, 144, 100, .08);
+    }
+
+    /* Make keyboard focus as visible as mouse hover. */
+    .experience-card:focus-visible {
+      outline: 2px solid var(--olive-light);
+      outline-offset: 5px;
+    }
+
+    /* Keep the experience title and its small label together. */
+    .experience-card-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    /* Make the dummy job or activity title easy to scan. */
+    .experience-title {
+      color: var(--pink);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 750;
+      line-height: 1.3;
+    }
+
+    /* Use olive for the smaller invitation to open the card. */
+    .experience-hint {
+      color: var(--olive-light);
+      font-size: .82rem;
+      letter-spacing: .025em;
+    }
+
+    /* Add a small arrow at the right side of each oblong. */
+    .experience-arrow {
+      flex: 0 0 auto;
+      color: var(--olive-light);
+      font-size: 1.5rem;
+      transition: transform .25s ease, color .25s ease;
+    }
+
+    /* Nudge the arrow right on hover to hint that the card opens. */
+    .experience-card:hover .experience-arrow {
+      color: var(--pink);
+      transform: translateX(4px);
+    }
+
+    /* Cards begin slightly lower and transparent before entering view. */
+    .experience-card.reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    /* JavaScript adds this class when a card enters the viewport. */
+    .experience-card.reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Fade cards out again when they leave the viewport. */
+    .experience-card.reveal-on-scroll:not(.is-visible) {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    /* ==========================================
+       EXPERIENCE DESCRIPTION POP-UP
+       ========================================== */
+
+    /* Cover the page with a dark, blurred overlay when a card opens. */
+    .experience-modal-backdrop {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(10, 8, 10, .76);
+      -webkit-backdrop-filter: blur(9px);
+      backdrop-filter: blur(9px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .3s ease, visibility .3s ease;
+    }
+
+    /* Reveal the backdrop when the pop-up is active. */
+    .experience-modal-backdrop.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    /* Keep the description panel centred and smaller than the screen. */
+    .experience-modal {
+      position: relative;
+      width: min(620px, 100%);
+      max-height: min(78vh, 680px);
+      overflow-y: auto;
+      padding: clamp(30px, 6vw, 52px);
+      border: 1px solid rgba(209, 106, 131, .65);
+      border-radius: 18px;
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(167, 71, 96, .22), transparent 55%),
+        linear-gradient(145deg, #2a1d24, #1c1b18);
+      box-shadow:
+        0 0 55px rgba(209, 106, 131, .19),
+        0 24px 80px rgba(0, 0, 0, .45);
+      transform: translateY(16px) scale(.985);
+      transition: transform .3s ease;
+    }
+
+    /* Bring the panel gently into place when it opens. */
+    .experience-modal-backdrop.is-open .experience-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    /* Position the close button in the panel's top-right corner. */
+    .experience-modal-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      border: 1px solid rgba(209, 106, 131, .4);
+      border-radius: 50%;
+      background: rgba(23, 19, 22, .7);
+      color: var(--pink);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    /* Give the close button clear hover feedback. */
+    .experience-modal-close:hover {
+      background: rgba(167, 71, 96, .35);
+      transform: rotate(90deg);
+    }
+
+    /* Keep the close button accessible when navigating with a keyboard. */
+    .experience-modal-close:focus-visible {
+      outline: 2px solid var(--olive-light);
+      outline-offset: 3px;
+    }
+
+    /* Style the small label above the selected experience title. */
+    .experience-modal-kicker {
+      margin: 0 0 14px;
+      color: var(--olive-light);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    /* Give the selected experience title a clear focal point. */
+    .experience-modal-title {
+      margin: 0 36px 22px 0;
+      color: var(--pink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 500;
+      line-height: 1.15;
+    }
+
+    /* Make the experience summary comfortable to read. */
+    .experience-modal-description {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.85;
+      white-space: pre-line;
+    }
+
+    /* Stop the background page from scrolling while the panel is open. */
+    body.experience-modal-open {
+      overflow: hidden;
+    }
+
+    /* On small screens, make the cards less wide-looking and the panel compact. */
+    @media (max-width: 520px) {
+      .experience-section {
+        margin-top: 76px;
+        padding-bottom: 45px;
+      }
+
+      .experience-heading-line {
+        margin-bottom: 30px;
+      }
+
+      .experience-list {
+        gap: 14px;
+      }
+
+      .experience-card {
+        min-height: 82px;
+        padding: 18px 22px;
+        border-radius: 28px;
+      }
+
+      .experience-modal-backdrop {
+        padding: 16px;
+      }
+
+      .experience-modal {
+        max-height: 82vh;
+        padding: 34px 24px;
+        border-radius: 14px;
+      }
+    }
+
+    /* Keep the pop-up and card animations subtle for reduced-motion users. */
+    @media (prefers-reduced-motion: reduce) {
+      .experience-card,
+      .experience-modal-backdrop,
+      .experience-modal,
+      .experience-arrow,
+      .experience-modal-close {
+        transition: none;
+      }
+    }
+    /* On medium and smaller screens, stack the image beneath the text. */
+    @media (max-width: 820px) {
+      .site-header, main, footer { width: min(100% - 36px, 680px); } /* Reduce side margins for tablets. */
+      .about-layout { grid-template-columns: 1fr; gap: 42px; } /* Change to one column. */
+      .image-frame { min-height: 360px; } /* Reduce the portrait area's height. */
+      .stats { max-width: none; } /* Let the stats use the available width. */
+    }
+
+    /* On narrow phones, stack the achievement cards and tighten spacing. */
+    @media (max-width: 520px) {
+      .site-header { padding: 22px 0; } /* Reduce header spacing. */
+      .header-note { display: none; } /* Hide the small note to save room. */
+      main { padding: 36px 0 54px; } /* Reduce main vertical padding. */
+      .stats { grid-template-columns: 1fr; } /* Place each achievement on its own row. */
+      .stat { min-height: auto; } /* Let each card fit its text. */
+      .image-frame { min-height: 300px; } /* Make the image placeholder shorter. */
+    }
+
+    /* Fade and rise into view when the page loads. */
+    @keyframes rise-in {
+      from { opacity: 0; transform: translateY(18px); } /* Start slightly lower and transparent. */
+      to { opacity: 1; transform: translateY(0); } /* Finish in place and fully visible. */
+    }
+
+    /* Respect visitors who have requested reduced motion in their device settings. */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important; /* Make animations effectively instant. */
+        transition-duration: .01ms !important; /* Make transitions effectively instant. */
+        scroll-behavior: auto !important; /* Disable smooth scrolling. */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Shared header: the brand links back to the homepage. -->
+  <header class="site-header">
+    <a class="brand" href="index.html">My Little Corner</a>
+    <span class="header-note">A little about me</span>
+
+    <nav class = "page-tabs" aria-label="Main nav">
+
+       <!-- Navigation Tabs for movement between pages-->
+      <a href = "index.html">Home Page</a>
+      <a href = "Page1.html">About Me</a>
+      <a href = "Page2.html">Experience</a>
+      <a href = "Page3.html">Interests and Creative Pursuits</a>
+      <a href = "Page4.html">Contact</a>
+      <a href = "Page5.html">CV</a>
+
+
+    </nav>
+
+
+
+
+
+  </header>
+
+  <!-- Main About Me section. -->
+  <main>
+    <section class="about-layout" aria-labelledby="page-title">
+      <!-- Left column: name, subtitle, biography and achievements. -->
+      <div class="about-copy">
+        <p class="eyebrow">A little introduction</p>
+        <h1 id="page-title">Joanna<br>Martindale</h1>
+        <p class="subtitle">STEAM Enthusiast and Gap Year Student</p>
+        <div class="accent-line" aria-hidden="true"></div>
+
+        <!-- Replace this Lorem ipsum paragraph with your own biography when ready. -->
+        <p class="bio">
+          Joanna is a gap year student and STEAM enthusiast who is fascinated by how code is used as a language to shape interactions between the physical and digital world. She is currently working as a Water Technician at CBRE and hopes that her hands-on experience will expose her to technical problems requiring computational solutions. As an academic enthusiast and creative she hopes to explore the intersection between creativity and tech. 
+        </p>
+
+        <!-- Achievement summary: change the text inside each stat as needed. -->
+        <div class="stats" aria-label="Academic achievements">
+          <article class="stat">
+            <strong class="stat-value">8 × Grade 9</strong>
+            <span class="stat-label">GCSEs</span>
+            <span class="stat-label">9999999987</span>
+          </article>
+          <article class="stat">
+            <strong class="stat-value">A*</strong>
+            <span class="stat-label">A Level Computer Science coursework</span>
+          </article>
+          <article class="stat">
+            <strong class="stat-value">AAB</strong>
+            <br>
+            <span class="stat-label">A Level results</span>
+            <br>
+            <span class="stat-label">Mathematics - A</span>
+            <br>
+            <span class="stat-label">Computer Science - A</span>
+            <br>
+            <span class="stat-label">Physics - B</span>
+          
+          </article>
+        </div>
+
+        <!-- Provide a simple way to return to the website homepage. -->
+        <a class="back-link" href="index.html">← Back to home</a>
+      </div>
+
+      <!-- Right column: replace this placeholder with a photo when you have one. -->
+      <aside class="image-frame" aria-label="Photo placeholder">
+        <div class="image-placeholder">
+          <span class="placeholder-icon" aria-hidden="true"><img href = "C:\Users\joann\Downloads\Joanna Personal Website\personal-website-dark-commented\joanna.jpg" alt="Photo of Joanna"></span>
+        </div>
+      </aside>
+    </section>
+       
+  </main>
+
+  <!-- Keep a quiet footer consistent with the rest of the site. -->
+  <footer>Made with care · A work in progress</footer>
+
+  <!-- Small JavaScript enhancement: smoothly scroll to a section when a matching anchor is used. -->
+    <script>
+    // ==========================================
+    // EXISTING IN-PAGE SMOOTH SCROLLING
+    // ==========================================
+
+    // Find links that point to a section within this page.
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+
+      // Listen for clicks on each in-page link.
+      link.addEventListener('click', function (event) {
+
+        // Find the section named in the link's href attribute.
+        const target = document.querySelector(link.getAttribute('href'));
+
+        // Only change the default behaviour if that section exists.
+        if (target) {
+          event.preventDefault();
+
+          // Move to the section smoothly rather than jumping instantly.
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+
+    // ==========================================
+    // EXPERIENCE CARDS: FADE IN AND OUT ON SCROLL
+    // ==========================================
+
+    // Select all five clickable experience cards.
+    const experienceCards = document.querySelectorAll('.experience-card');
+
+    // Check whether the browser supports observing elements as they scroll.
+    if ('IntersectionObserver' in window) {
+
+      // Watch cards as they enter and leave the visible part of the page.
+      const experienceObserver = new IntersectionObserver(function (entries) {
+
+        // Process each card whose visibility has changed.
+        entries.forEach(function (entry) {
+
+          // Add the visible class when a card enters the viewport.
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          } else {
+
+            // Remove the class when the card leaves the viewport,
+            // allowing it to fade out and fade in again on re-entry.
+            entry.target.classList.remove('is-visible');
+          }
+        });
+
+      }, {
+        threshold: 0.12, // Trigger when roughly 12% of a card is visible.
+        rootMargin: '0px 0px -35px 0px' // Start the effect slightly inside the viewport.
+      });
+
+      // Start observing every experience card.
+      experienceCards.forEach(function (card) {
+        experienceObserver.observe(card);
+      });
+
+    } else {
+
+      // Fallback for older browsers: show every card without scroll effects.
+      experienceCards.forEach(function (card) {
+        card.classList.add('is-visible');
+      });
+    }
+
+
+    // ==========================================
+    // EXPERIENCE DESCRIPTION POP-UP
+    // ==========================================
+
+    // Find the reusable background overlay and description panel.
+    const modalBackdrop = document.getElementById('experience-modal-backdrop');
+    const modal = document.getElementById('experience-modal');
+
+    // Find the title, description and close button inside the panel.
+    const modalTitle = document.getElementById('experience-modal-title');
+    const modalDescription = document.getElementById('experience-modal-description');
+    const modalCloseButton = document.getElementById('experience-modal-close');
+
+    // Remember which card opened the panel so keyboard focus can return to it.
+    let previouslyFocusedCard = null;
+
+    // Open the description panel for the selected experience.
+    function openExperience(card) {
+
+      // Remember the clicked card for when the panel closes.
+      previouslyFocusedCard = card;
+
+      // Read the title and description directly from the clicked card.
+      modalTitle.textContent = card.dataset.title;
+      modalDescription.textContent = card.dataset.description;
+
+      // Reveal the dimmed and blurred background overlay.
+      modalBackdrop.classList.add('is-open');
+
+      // Tell assistive technology that the overlay is now visible.
+      modalBackdrop.setAttribute('aria-hidden', 'false');
+
+      // Prevent the page behind the panel from scrolling.
+      document.body.classList.add('experience-modal-open');
+
+      // Move keyboard focus to the close button for accessibility.
+      modalCloseButton.focus();
+    }
+
+    // Close the panel and return the visitor to the experience stack.
+    function closeExperience() {
+
+      // Do nothing if the panel is already closed.
+      if (!modalBackdrop.classList.contains('is-open')) {
+        return;
+      }
+
+      // Hide the overlay and start its fade-out transition.
+      modalBackdrop.classList.remove('is-open');
+
+      // Mark the hidden overlay as unavailable to assistive technology.
+      modalBackdrop.setAttribute('aria-hidden', 'true');
+
+      // Restore scrolling on the page.
+      document.body.classList.remove('experience-modal-open');
+
+      // Return keyboard focus to the card that opened the panel.
+      if (previouslyFocusedCard) {
+        previouslyFocusedCard.focus();
+      }
+    }
+
+    // Open the matching description whenever an experience card is clicked.
+    experienceCards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        openExperience(card);
+      });
+    });
+
+    // Close the panel when the visitor clicks the X button.
+    modalCloseButton.addEventListener('click', closeExperience);
+
+    // Also close the panel when the visitor clicks the dimmed area outside it.
+    modalBackdrop.addEventListener('click', function (event) {
+
+      // Only close when the backdrop itself was clicked, not the panel.
+      if (event.target === modalBackdrop) {
+        closeExperience();
+      }
+    });
+
+    // Allow Escape to close the description panel.
+    document.addEventListener('keydown', function (event) {
+
+      // Only respond to Escape while the panel is open.
+      if (
+        event.key === 'Escape' &&
+        modalBackdrop.classList.contains('is-open')
+      ) {
+        closeExperience();
+      }
+    });
+  </script>
+</body>
+</html>
