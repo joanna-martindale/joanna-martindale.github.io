@@ -571,6 +571,84 @@ main.contact-page {
 </main>
 
     
+<!-- Floating message form: hidden until the visitor clicks the message button. -->
+<div class="message-overlay"
+     id="messageOverlay"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="messageFormTitle"
+     hidden>
+
+    <!-- The visible panel containing the message form. -->
+    <section class="message-panel">
+
+        <!-- Form heading and close button. -->
+        <div class="message-form-header">
+            <div>
+                <p class="message-form-eyebrow">GET IN TOUCH</p>
+                <h2 id="messageFormTitle">Send me a message</h2>
+                <p class="message-form-intro">
+                    I'd love to hear from you.
+                </p>
+            </div>
+
+            <!-- Close the floating form. -->
+            <button type="button"
+                    class="message-close"
+                    id="closeMessageForm"
+                    aria-label="Close message form">
+                &times;
+            </button>
+        </div>
+
+        <!-- Message form fields. Email delivery will be connected in a later step. -->
+        <form id="contactMessageForm">
+
+            <!-- Visitor's name. -->
+            <label for="senderName">Your name</label>
+            <input type="text"
+                   id="senderName"
+                   name="name"
+                   autocomplete="name"
+                   placeholder="Enter your name"
+                   required>
+
+            <!-- Visitor's email address. -->
+            <label for="senderEmail">Your email address</label>
+            <input type="email"
+                   id="senderEmail"
+                   name="email"
+                   autocomplete="email"
+                   placeholder="you@example.com"
+                   required>
+
+            <!-- Optional subject for the message. -->
+            <label for="messageSubject">Subject (optional)</label>
+            <input type="text"
+                   id="messageSubject"
+                   name="subject"
+                   placeholder="What would you like to discuss?">
+
+            <!-- The message itself. -->
+            <label for="senderMessage">Your message</label>
+            <textarea id="senderMessage"
+                      name="message"
+                      rows="5"
+                      placeholder="Write your message here..."
+                      required></textarea>
+
+            <!-- Submit button. Email delivery is not connected yet. -->
+            <button type="submit" class="message-send-button">
+                Send message
+            </button>
+
+            <!-- Display form feedback here in a later step. -->
+            <p id="messageFormStatus" role="status" aria-live="polite"></p>
+
+        </form>
+    </section>
+</div>
+
     
 
   <!-- Keep the same footer on every page. -->
