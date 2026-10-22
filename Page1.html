@@ -253,6 +253,17 @@
       animation: rise-in .9s .12s ease both; /* Fade the image area in slightly after the text. */
     }
 
+    /* Display the profile photograph inside its frame. */
+    
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
     /* Add a thin inset border as a decorative frame detail. */
     .image-frame::before {
       content: ""; /* Create a decorative pseudo-element with no text. */
@@ -426,12 +437,12 @@
         <a class="back-link" href="index.html">← Back to home</a>
       </div>
 
-      <!-- Right column: replace this placeholder with a photo when you have one. -->
-      <aside class="image-frame" aria-label="Photo placeholder">
-        <div class="image-placeholder">
-          <span class="placeholder-icon" aria-hidden="true"><img scr = "joanna.jpg" alt="Photo of Joanna"></span>
-        </div>
+      <!-- Right column: display your profile photograph. -->
+      
+      <aside class="image-frame" aria-label="Profile photograph">
+          <img src="joanna.jpg" alt="Portrait of Joanna Martindale" class="profile-photo">
       </aside>
+      
     </section>
        
   </main>
