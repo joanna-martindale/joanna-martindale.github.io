@@ -239,11 +239,11 @@
 
     /* Reserve a space on the right for a future photo or illustration. */
     .image-frame {
-      position: relative; /* Allow the decorative frame to sit behind the placeholder. */
+      position: relative; /* Allow the decorative frame to sit behind the image of Joanna. */
       min-height: 470px; /* Give the image area a substantial portrait shape. */
-      display: grid; /* Centre the placeholder content. */
-      place-items: center; /* Align the placeholder in both directions. */
-      padding: 28px; /* Keep the placeholder text away from the frame edges. */
+      display: grid; /* Centre the image content. */
+      place-items: center; /* Align the image in both directions. */
+     
       border: 1px solid rgba(209, 106, 131, .42); /* Outline the image area in rose. */
       border-radius: 3px; /* Keep the design's edges sharp. */
       background:
@@ -278,21 +278,6 @@
       pointer-events: none; /* Let clicks pass through the decoration. */
     }
 
-    /* Style the image placeholder label until a real image is added. */
-    .image-placeholder {
-      max-width: 260px; /* Keep the placeholder message narrow. */
-      color: var(--muted); /* Use secondary text styling. */
-      text-align: center; /* Centre the icon and instructions. */
-      line-height: 1.7; /* Make the instructions easy to read. */
-    }
-
-    /* Display a simple camera-like icon without needing an image file. */
-    .placeholder-icon {
-      display: block; /* Put the icon on its own line. */
-      margin-bottom: 18px; /* Add space below the icon. */
-      color: var(--olive-light); /* Use pale olive for the icon. */
-      font-size: 2.8rem; /* Make the icon prominent. */
-    }
 
     /* Style the link back to the homepage. */
     .back-link {
@@ -354,7 +339,7 @@
       main { padding: 36px 0 54px; } /* Reduce main vertical padding. */
       .stats { grid-template-columns: 1fr; } /* Place each achievement on its own row. */
       .stat { min-height: auto; } /* Let each card fit its text. */
-      .image-frame { min-height: 300px; } /* Make the image placeholder shorter. */
+      .image-frame { min-height: 300px; } /* Make the image shorter. */
     }
 
     /* Fade and rise into view when the page loads. */
