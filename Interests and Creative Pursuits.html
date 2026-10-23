@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<!-- Declare this file as an HTML5 document. -->
+<html lang="en">
+<!-- Set the page language to English. -->
+<head>
+  <!-- Support standard text characters. -->
+  <meta charset="UTF-8">
+  <!-- Make the page responsive on mobile screens. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Describe this page briefly. -->
+  <meta name="description" content="Joanna Martindale shares her interests and creative pursuits">
+  <!-- Set the browser tab title for this section. -->
+  <title>Interests | Joanna Martindale</title>
+
+  <!-- Use the same internal CSS as the homepage to keep the design consistent. -->
+    <!-- Shared external stylesheet for all pages. -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-interests">
+  <!-- Repeat the shared header so every page feels part of the same website. -->
+  <header>
+    <!-- This link returns visitors to the homepage. -->
+    <a class="brand" href="index.html">My Little Corner</a>
+    <!-- Identify the current placeholder section. -->
+  
+  
+    <nav class = "page-tabs" aria-label="Main nav">
+
+       <!-- Navigation Tabs for movement between pages-->
+      <a href = "index.html">Home Page</a>
+      <a href = "About Me.html">About Me</a>
+      <a href = "Experience.html">Experience</a>
+      <a href = "Interests and Creative Pursuits.html" class = "active" aria-current = "page">Interests and Creative Pursuits</a>
+      <a href = "Contact.html">Contact Me</a>
+      <a href = "Joanna_Martindale_CV.pdf" target = "_blank" rel = "noopener noreferrer">CV</a>
+      <!--target="_blank" opens the cv in a separate tab and rel=...noreferrer adds a security and privac safeguard and href="CV..." points to file path of my CV-->
+
+
+    </nav>
+      <span class="header-note">Page 3 · More coming soon</span>
+  </header>
+
+  <!-- Main content area for this section. -->
+  <!-- ==========================================
+     INTERESTS PAGE INTRODUCTION
+     Displays the page heading and a short
+     introduction above the branching layout.
+=========================================== -->
+<section class="interests-intro">
+
+    <!-- Small decorative label above the heading. -->
+    <p class="section-eyebrow">A GROWING COLLECTION</p>
+
+    <!-- Main heading for the interests page. -->
+    <h1>Interests & Creative Pursuits</h1>
+
+    <!-- Brief explanation of what the page contains. -->
+    <p>
+        A collection of subjects, ideas and experiences
+        that spark my curiosity and inspire me to explore.
+    </p>
+
+</section>
+
+<!-- ==========================================
+     INTEREST TREE
+     Displays six clickable interests arranged
+     alternately on either side of a central stem.
+=========================================== -->
+<main class="interests-page">
+
+    <!-- Holds all six interest cards. -->
+    <section class="interest-tree" aria-label="My interests">
+
+        <!-- Interest 1: Classical and Cinematic Pop Music -->
+        <button type="button" class="interest-card left" data-interest="music">
+            <span class="interest-number">01</span>
+            <span class="interest-name"> Classical &amp; Cinematic Pop Music</span>
+            <span class="interest-hint">Explore interest ↗</span>
+        </button>
+
+        <!-- Interest 2: Computer Vision &amp; Machine Learning -->
+        <button type="button" class="interest-card right" data-interest="computing">
+            <span class="interest-number">02</span>
+            <span class="interest-name">Computer Vision &amp; Machine Learning</span>
+            <span class="interest-hint">Explore interest ↗</span>
+        </button>
+
+        <!-- Interest 3: Dance -->
+        <button type="button" class="interest-card left" data-interest="dance">
+            <span class="interest-number">03</span>
+            <span class="interest-name">Dance</span>
+            <span class="interest-hint">Explore interest ↗</span>
+        </button>
+
+        <!-- Interest 4: Pending -->
+        <button type="button" class="interest-card right" data-interest="pending">
+            <span class="interest-number">04</span>
+            <span class="interest-name">Pending</span>
+            <span class="interest-hint">Explore interest ↗</span>
+        </button>
+
+        <!-- Interest 5:  Pending -->
+        <button type="button" class="interest-card left" data-interest="pending">
+            <span class="interest-number">05</span>
+            <span class="interest-name">Pending</span>
+            <span class="interest-hint">Explore interest ↗</span>
+        </button>
+
+        <!-- Interest 6: Pending -->
+        <button type="button" class="interest-card right" data-interest="pending">
+            <span class="interest-number">06</span>
+            <span class="interest-name">Pending</span>
+            <span class="interest-hint">Explore interest ↗</span>
+        </button>
+
+    </section>
+</main>
+
+<!-- ==========================================
+     FLOATING INTEREST DESCRIPTION
+     JavaScript fills this panel when a card
+     is clicked. The overlay dims the background.
+=========================================== -->
+<div class="interest-overlay" id="interestOverlay" aria-hidden="true">
+
+    <!-- The centred description panel. -->
+    <section class="interest-modal"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="modalTitle">
+
+        <!-- Closes the description panel. -->
+        <button type="button"
+                class="interest-close"
+                id="closeInterest"
+                aria-label="Close description">&times;</button>
+
+        <!-- Small decorative label. -->
+        <p class="section-eyebrow">A CLOSER LOOK</p>
+
+        <!-- JavaScript inserts the selected interest's title here. -->
+        <h2 id="modalTitle">Interest</h2>
+
+        <!-- Decorative line beneath the title. -->
+        <div class="modal-divider"></div>
+
+        <!-- First description section. -->
+        <h3>Why I like it / what fascinates me</h3>
+        <p id="modalWhy"></p>
+
+        <!-- Second description section. -->
+        <h3>How I am exploring it</h3>
+        <p id="modalHow"></p>
+
+    </section>
+</div>
+
+  <!-- Keep the same footer on every page. -->
+  <footer>Made with care · A work in progress</footer>
+
+
+<!-- ==========================================
+     INTERESTS PAGE JAVASCRIPT
+     Controls the interest descriptions and
+     the floating modal on Interests and Creative Pursuits page.
+=========================================== -->
+<script>
+
+/* ==========================================
+   1. INTEREST DETAILS
+   Stores the title and two descriptions for
+   each interest. The keys (music, computing,
+   etc.) must match the data-interest attributes
+   on the corresponding HTML interest cards.
+=========================================== */
+const interestDetails = {
+
+    // Details displayed when the Music interest is selected.
+    music: {
+        title: "Classical and Cinematic Pop Music",
+        // Explains why this interest is fascinating.
+        why: "I love how music can move people to feel emotions. I specifically enjoy the classical and cinematic genres because of how heavily they draw from a composers experience, large variaions in style and how dramatic they sound. ",
+        // Explains how this interest is being explored.
+        how: "I love playing the piano and improvising dramatic arrangements for them. Recently pieces I have arranged for piano are JVKE's 'Her', Andrew Lloyd Webber's 'Memory' and I hope to arrange a version of Faouzia's'Unethical'"
+    },
+
+    // Details displayed when the Computer Vision and Machine Larning interest is selected.
+    computing: {
+        title: "Computer Vision & Macine Learning",
+        why: "I find it interesting that machines are able to collect, process and analyse raw data from the environment to make conclusions about things that (seemingly) only a human would have been able to do. My interest was sparked after watching a Veritasium video about the Micro Mouse Competition",
+        how: "Mostly through watching videos, but I do want to try a practical project soon"
+    },
+
+    // Details displayed when the Dance interest is selected.
+    dance: {
+        title: "Dance",
+        why: "I've always enjoyed dance having done ballet, tap and gymnastics between the ages of 6-16. I love how dance is used in musical theatre, I enjoy when jazz is implemented. I saw a clip of Brotherhood Dance Crew performing at the IDL and it 'awakened' my interest and elevated my appreciation for different dance styles and also admiration of individuals who train to have so much control over their bodies and movements. ",
+        how: "Binge watching Brotherhood's sets every few days - they're just so good! Favourite Sets = I Want You Back, Bebothood, Sisterhood, Toxic, and Cowboyhood"
+    },
+
+    // Details displayed when the Pending interest is selected.
+    pending: {
+        title: "Pending",
+        why: "Joanna is exploring, next time you come you might see something!",
+        how: "One day..."
+    },
+
+    // Details displayed when the Pending interest is selected.
+    pending: {
+        title: "Pending",
+        why: "Joanna is exploring, next time you come you might see something!",
+        how: "Something interesting is going to pop up here!"
+    },
+
+    // Details displayed when the Pending interest is selected.
+    pending: {
+        title: "Pending",
+        why: "Joanna is exploring, next time you come you might see something!",
+        how: "This spot is reserved for something really fascinating"
+    }
+};
+
+
+/* ==========================================
+   2. CONNECT TO THE HTML ELEMENTS
+   Finds the modal, its close button and the
+   elements where the selected interest's
+   title and descriptions will appear.
+=========================================== */
+
+// The full-screen overlay behind the floating description box.
+const overlay = document.getElementById("interestOverlay");
+
+// The button that closes the description box.
+const closeButton = document.getElementById("closeInterest");
+
+// The heading that displays the selected interest's title.
+const modalTitle = document.getElementById("modalTitle");
+
+// The paragraph that displays why the interest is fascinating.
+const modalWhy = document.getElementById("modalWhy");
+
+// The paragraph that displays how the interest is being explored.
+const modalHow = document.getElementById("modalHow");
+
+// Remembers which element was focused before the modal opened.
+// This allows keyboard focus to return to that element when closed.
+let previousFocus = null;
+
+
+/* ==========================================
+   3. OPEN AN INTEREST DESCRIPTION
+   Receives the selected interest's key and
+   displays its information in the modal.
+=========================================== */
+function openInterest(key) {
+
+    // Retrieve the details that match the selected interest key.
+    const interest = interestDetails[key];
+
+    // Stop the function if no matching interest was found.
+    if (!interest) return;
+
+    // Remember the currently focused element, usually the clicked card.
+    previousFocus = document.activeElement;
+
+    // Update the modal heading and both description paragraphs.
+    // textContent inserts plain text rather than interpreting HTML.
+    modalTitle.textContent = interest.title;
+    modalWhy.textContent = interest.why;
+    modalHow.textContent = interest.how;
+
+    // Add the CSS class that makes the modal visible.
+    overlay.classList.add("is-open");
+
+    // Update the accessibility attribute to indicate that
+    // the overlay is now visible to assistive technologies.
+    overlay.setAttribute("aria-hidden", "false");
+
+    // Prevent the page behind the modal from scrolling while it is open.
+    document.body.style.overflow = "hidden";
+
+    // Move keyboard focus to the close button for easier navigation.
+    closeButton.focus();
+}
+
+
+/* ==========================================
+   4. CLOSE THE INTEREST DESCRIPTION
+   Hides the modal, restores page scrolling
+   and returns keyboard focus to the previous
+   element when possible.
+=========================================== */
+function closeInterest() {
+
+    // Remove the CSS class that makes the modal visible.
+    overlay.classList.remove("is-open");
+
+    // Mark the hidden overlay as unavailable to assistive technologies.
+    overlay.setAttribute("aria-hidden", "true");
+
+    // Restore the page's normal scrolling behaviour.
+    document.body.style.overflow = "";
+
+    // Return focus to the element that was selected before the modal opened.
+    if (previousFocus) {
+        previousFocus.focus();
+    }
+}
+
+
+/* ==========================================
+   5. HANDLE INTEREST CARD CLICKS
+   Finds every element with the interest-card
+   class and adds a click listener to it.
+=========================================== */
+document.querySelectorAll(".interest-card").forEach(card => {
+
+    // Run this function whenever the current card is clicked.
+    card.addEventListener("click", () => {
+
+        // Read the card's data-interest attribute.
+        // For example, data-interest="design" passes the key "design".
+        // That key is used to retrieve the correct description above.
+        openInterest(card.dataset.interest);
+    });
+});
+
+
+/* ==========================================
+   6. HANDLE THE CLOSE BUTTON
+   Closes the modal when the user clicks
+   the × button inside the description box.
+=========================================== */
+closeButton.addEventListener("click", closeInterest);
+
+
+/* ==========================================
+   7. CLOSE WHEN CLICKING OUTSIDE THE BOX
+   Clicking the darkened overlay closes the
+   modal. Clicking inside the description box
+   does not trigger this behaviour.
+=========================================== */
+overlay.addEventListener("click", event => {
+
+    // event.target is the exact element that received the click.
+    // Only close when that element is the overlay itself.
+    if (event.target === overlay) {
+        closeInterest();
+    }
+});
+
+
+/* ==========================================
+   8. CLOSE USING THE ESCAPE KEY
+   Allows keyboard users to close the modal
+   without needing to click the close button.
+=========================================== */
+document.addEventListener("keydown", event => {
+
+    // Check that the pressed key is Escape and that
+    // the modal is currently open before closing it.
+    if (
+        event.key === "Escape" &&
+        overlay.classList.contains("is-open")
+    ) {
+        closeInterest();
+    }
+});
+
+</script>
+
+  
+</body>
+</html>
