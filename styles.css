@@ -21,6 +21,8 @@
   --ink: #f7edf0;        /* Main soft off-white text. */
   --muted: #c1adb4;      /* Secondary text. */
   --line: #54333e;       /* Subtle burgundy border. */
+  --pink: #f1b2c0;      /* Soft pink for gentle highlights and decorative accents. */
+  --olive-light: #c0c79a;     /* Pale olive for light, complementary accents. */
 }
 
 /* 2. Consistent box sizing across the website. */
