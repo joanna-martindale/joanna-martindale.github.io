@@ -87,7 +87,11 @@ main.contact-page {
     background: rgba(196, 106, 131, 0.08);
     transform: translateY(-2px);
 }
-
+/* Make contact cards visibly focused for keyboard users. */
+.contact-link:focus-visible {
+    outline: 2px solid var(--rose, #c46a83);
+    outline-offset: 3px;
+}
 /* ==========================================
    CONTACT ICONS
 ========================================== */
@@ -556,7 +560,7 @@ main.contact-page {
                       placeholder="Write your message here..."
                       required></textarea>
 
-            <!-- Submit button. Email delivery is not connected yet. -->
+            <!-- Submit the message to Formspree. -->
             <button type="submit" class="message-send-button">
                 Send message
             </button>
