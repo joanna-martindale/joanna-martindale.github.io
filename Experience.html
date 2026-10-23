@@ -747,15 +747,6 @@ technical aspects) and supported younger members to shape their ideas into a pra
     // Close the panel when the visitor clicks the X button.
     modalCloseButton.addEventListener('click', closeExperience);
 
-    // Also close the panel when the visitor clicks the dimmed area outside it.
-    modalBackdrop.addEventListener('click', function (event) {
-
-      // Only close when the backdrop itself was clicked, not the panel.
-      if (event.target === modalBackdrop) {
-        closeExperience();
-      }
-    });
-
     // Allow Escape to close the description panel.
     document.addEventListener('keydown', function (event) {
 
