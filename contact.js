@@ -145,28 +145,41 @@ document.addEventListener("keydown", function (event) {
 });
 
 
-
-
- 
-// ==========================================
-// KEEP KEYBOARD FOCUS INSIDE THE MODAL
+ // ==========================================
+// CLOSE THE FLOATING FORM
 // ==========================================
 
-messageOverlay.addEventListener("keydown", function (event) {
+function closeMessageForm() {
 
-    // Only handle Tab navigation while the modal is open.
+    // Do not close the form while a message is being submitted.
+    if (isSubmitting) {
+        return;
+    }
+
+    // Hide the contact form.
+    messageOverlay.hidden = true;
+
+    // Return keyboard focus to the button that opened the form.
+    if (previousFocusedElement) {
+        previousFocusedElement.focus();
+    }
+}
+
+ // ==========================================
+ // KEEP KEYBOARD FOCUS INSIDE THE MODAL
+ // ==========================================
+
+document.addEventListener("keydown", function (event) {
+
+    // Only trap Tab navigation while the modal is open.
     if (event.key !== "Tab" || messageOverlay.hidden) {
         return;
     }
 
-    // Find the dialog inside the overlay.
-    const dialog = messageOverlay.querySelector('[role="dialog"]');
+    // The overlay itself is the dialog in your HTML.
+    const dialog = messageOverlay;
 
-    if (!dialog) {
-        return;
-    }
-
-    // Find visible, enabled elements that can receive keyboard focus.
+    // Find enabled, visible elements that can receive focus.
     const focusableElements = Array.from(
         dialog.querySelectorAll(
             'a[href], button:not(:disabled), input:not(:disabled), textarea:not(:disabled), select:not(:disabled), [tabindex]:not([tabindex="-1"])'
@@ -176,7 +189,7 @@ messageOverlay.addEventListener("keydown", function (event) {
                element.getAttribute("aria-hidden") !== "true";
     });
 
-    // Prevent focus from escaping if no focusable elements exist.
+    // If no focusable elements exist, keep focus on the dialog.
     if (focusableElements.length === 0) {
         event.preventDefault();
         dialog.setAttribute("tabindex", "-1");
@@ -187,31 +200,40 @@ messageOverlay.addEventListener("keydown", function (event) {
     const firstElement = focusableElements[0];
     const lastElement = focusableElements[focusableElements.length - 1];
 
-    // Shift + Tab: wrap backwards from the first element.
+    // If focus has escaped the modal, bring it back inside.
+    if (!dialog.contains(document.activeElement)) {
+        event.preventDefault();
+
+        if (event.shiftKey) {
+            lastElement.focus();
+        } else {
+            firstElement.focus();
+        }
+
+        return;
+    }
+
+    // Shift + Tab from the first element wraps to the last.
     if (
         event.shiftKey &&
-        (
-            document.activeElement === firstElement ||
-            !dialog.contains(document.activeElement)
-        )
+        document.activeElement === firstElement
     ) {
         event.preventDefault();
         lastElement.focus();
     }
 
-    // Tab: wrap forwards from the last element.
+    // Tab from the last element wraps to the first.
     else if (
         !event.shiftKey &&
-        (
-            document.activeElement === lastElement ||
-            !dialog.contains(document.activeElement)
-        )
+        document.activeElement === lastElement
     ) {
         event.preventDefault();
         firstElement.focus();
     }
 
 });
+
+
 
 // ==========================================
 // DISPLAY FIELD VALIDATION MESSAGES
