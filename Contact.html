@@ -10,7 +10,7 @@
   <!-- Describe this page briefly. -->
   <meta name="description" content="Joanna Martindale shares her contact details for social networking and enquiries.">
   <!-- Set the browser tab title for this section. -->
-  <title>Contact Me |  Martindale</title>
+  <title>Contact Me | Joanna Martindale</title>
    <!-- Contact page and shared styling -->
   
     <style>
@@ -185,8 +185,10 @@ main.contact-page {
 
 /* Style the floating form panel. */
 .message-panel {
+    box-sizing: border-box;
     width: min(100%, 34rem);
-    max-height: 90vh;
+    max-height: calc(100vh - 2rem);
+    max-height: calc(100dvh - 2rem)
     overflow-y: auto;
     padding: clamp(1.25rem, 4vw, 2rem);
     color: var(--ink);
@@ -441,7 +443,7 @@ main.contact-page {
     <!-- Identify the current tab being viewed. -->
     
   
-    <nav class = "page-tabs" aria-label="Main nav">
+    <nav class="page-tabs" aria-label="Main nav">
 
        <!-- Navigation Tabs for movement between pages-->
       <a href = "index.html">Home Page</a>
