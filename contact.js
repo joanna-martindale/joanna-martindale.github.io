@@ -502,7 +502,7 @@ contactForm.addEventListener(
             showFormStatus(
                 "Thank you for getting in touch! Your message " +
                 "has been submitted successfully, and I appreciate your interest" +
-                "Please wait patiently " +
+                "\nPlease wait patiently " +
                 "while I review your message and get back to you. " +
                 "I appreciate your patience.",
                 "success"
