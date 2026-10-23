@@ -525,50 +525,89 @@ main.contact-page {
         </div>
 
         <!-- Send submitted messages to your Formspree endpoint. -->
-<form id="contactMessageForm" action="https://formspree.io/f/moejgoab" method="POST">
 
-            <!-- Visitor's name. -->
-            <label for="senderName">Your name</label>
-            <input type="text"
-                   id="senderName"
-                   name="name"
-                   autocomplete="name"
-                   placeholder="Enter your name"
-                   required>
+<!-- Submit messages to Formspree. -->
+<form id="contactMessageForm"
+      action="https://formspree.io/f/moejgoab"
+      method="POST"
+      novalidate>
 
-            <!-- Visitor's email address. -->
-            <label for="senderEmail">Your email address</label>
-            <input type="email"
-                   id="senderEmail"
-                   name="email"
-                   autocomplete="email"
-                   placeholder="you@example.com"
-                   required>
+    <p class="required-note">
+        Fields marked with <span aria-hidden="true">*</span> are required.
+    </p>
 
-            <!-- Optional subject for the message. -->
-            <label for="messageSubject">Subject (optional)</label>
-            <input type="text"
-                   id="messageSubject"
-                   name="subject"
-                   placeholder="What would you like to discuss?">
+    <!-- Visitor's name. -->
+    <label for="senderName">
+        Your name <span class="required-indicator" aria-hidden="true">*</span>
+    </label>
+    <input type="text"
+           id="senderName"
+           name="name"
+           autocomplete="name"
+           placeholder="Enter your name"
+           minlength="2"
+           maxlength="100"
+           required
+           aria-describedby="senderNameError"
+           aria-invalid="false">
+    <p class="field-error" id="senderNameError" aria-live="polite"></p>
 
-            <!-- The message itself. -->
-            <label for="senderMessage">Your message</label>
-            <textarea id="senderMessage"
-                      name="message"
-                      rows="5"
-                      placeholder="Write your message here..."
-                      required></textarea>
+    <!-- Visitor's email address. -->
+    <label for="senderEmail">
+        Your email address
+        <span class="required-indicator" aria-hidden="true">*</span>
+    </label>
+    <input type="email"
+           id="senderEmail"
+           name="email"
+           autocomplete="email"
+           placeholder="you@example.com"
+           maxlength="254"
+           required
+           aria-describedby="senderEmailError"
+           aria-invalid="false">
+    <p class="field-error" id="senderEmailError" aria-live="polite"></p>
 
-            <!-- Submit the message to Formspree. -->
-            <button type="submit" class="message-send-button">
-                Send message
-            </button>
+    <!-- Optional subject. -->
+    <label for="messageSubject">Subject (optional)</label>
+    <input type="text"
+           id="messageSubject"
+           name="subject"
+           placeholder="What would you like to discuss?"
+           maxlength="150"
+           aria-describedby="messageSubjectError"
+           aria-invalid="false">
+    <p class="field-error" id="messageSubjectError" aria-live="polite"></p>
 
-            <!-- Display form feedback here in a later step. -->
-            <p id="messageFormStatus" role="status" aria-live="polite"></p>
+    <!-- Visitor's message. -->
+    <label for="senderMessage">
+        Your message <span class="required-indicator" aria-hidden="true">*</span>
+    </label>
+    <textarea id="senderMessage"
+              name="message"
+              rows="5"
+              minlength="10"
+              maxlength="5000"
+              placeholder="Write your message here..."
+              required
+              aria-describedby="senderMessageError"
+              aria-invalid="false"></textarea>
+    <p class="field-error" id="senderMessageError" aria-live="polite"></p>
 
-        </form>
+    <!-- General submission feedback. -->
+    <p id="messageFormStatus"
+       class="form-status"
+       role="status"
+       aria-live="polite"
+       tabindex="-1"></p>
+
+    <!-- Submit button. -->
+    <button type="submit" class="message-send-button">
+        Send message
+    </button>
+
+</form>
+
     </section>
 </div>
 
