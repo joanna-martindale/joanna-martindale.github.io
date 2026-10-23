@@ -145,35 +145,6 @@ document.addEventListener("keydown", function (event) {
 });
 
 
-// Define the actions required to close the floating form.
-function closeMessageForm() {
-
-    // Keep the form open while a message is being submitted.
-    if (isSubmitting) return;
-
-    // Hide the overlay and floating form.
-    messageOverlay.hidden = true;
-
-    // Return keyboard focus to the element that opened the form.
-    if (previousFocusedElement) {
-        previousFocusedElement.focus();
-    }
-}
-
-// Define the actions required to close the floating form.
-function closeMessageForm() {
-
-    // Keep the form open while a message is being submitted.
-    if (isSubmitting) return;
-
-    // Hide the overlay and floating form.
-    messageOverlay.hidden = true;
-
-    // Return keyboard focus to the element that opened the form.
-    if (previousFocusedElement) {
-        previousFocusedElement.focus();
-    }
-}
 
 
  
