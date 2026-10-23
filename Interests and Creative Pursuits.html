@@ -431,7 +431,8 @@
     <section class="interest-modal"
              role="dialog"
              aria-modal="true"
-             aria-labelledby="modalTitle">
+             aria-labelledby="modalTitle"
+             tabindex="-1">
 
         <!-- Closes the description panel. -->
         <button type="button"
@@ -584,8 +585,9 @@ function openInterest(key) {
     // Prevent the page behind the modal from scrolling while it is open.
     document.body.style.overflow = "hidden";
 
-    // Move keyboard focus to the close button for easier navigation.
-    closeButton.focus();
+    // Move keyboard focus to the modal so keyboard users can scroll it.
+    const modal = document.querySelector(".interest-modal");
+    modal.focus();
 }
 
 
