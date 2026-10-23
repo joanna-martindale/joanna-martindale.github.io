@@ -11,7 +11,357 @@
   <meta name="description" content="Joanna Martindale shares her contact details for social networking and enquiries.">
   <!-- Set the browser tab title for this section. -->
   <title>Contact Me | Joanna Martindale</title>
+   <!-- Contact page and shared styling -->
+  
+    <style>
+        
+/* ==========================================
+   CONTACT PAGE LAYOUT
+========================================== */
 
+/* Control the width and spacing of the contact page. */
+main.contact-page {
+    display: block;
+    width: 100%;
+    max-width: 90rem;
+    margin: 0 auto;
+    padding: clamp(1rem, 4vw, 3rem);
+    flex: 1;
+    box-sizing: border-box;
+    place-items: initial;
+    align-self: stretch;
+}
+
+/* Centre the contact content and limit its width. */
+.contact-section {
+    width: min(100%, 42rem);
+    margin: 0 auto;
+    margin-top: 0;
+}
+
+/* Style the main Contact Me heading. */
+.contact-section h1 {
+    margin: 0;
+    color: var(--ink, #f8edf0);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+/* Style the subtitle beneath the heading. */
+.contact-subtitle {
+    margin: 0.75rem 0 clamp(2rem, 5vw, 3rem);
+    color: var(--muted, #c5afb7);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+/* Stack the contact links vertically. */
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Style the contact cards and message button. */
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+    padding: clamp(0.9rem, 2.5vw, 1.25rem);
+    color: var(--ink, #f8edf0);
+    text-decoration: none;
+    border: 1px solid var(--line, rgba(255,255,255,0.12));
+    background: var(--panel, rgba(255,255,255,0.025));
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Add a subtle rose highlight on hover. */
+.contact-link:hover {
+    border-color: var(--rose, #c46a83);
+    background: rgba(196, 106, 131, 0.08);
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   CONTACT ICONS
+========================================== */
+
+/* Create a consistent background for each icon. */
+.contact-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.75rem;
+    aspect-ratio: 1;
+    color: var(--rose, #c46a83);
+    background: rgba(196, 106, 131, 0.1);
+}
+
+/* Size and style the SVG icons. */
+.contact-icon svg {
+    width: 1.35rem;
+    height: 1.35rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Refine the LinkedIn and GitHub icon outlines. */
+.linkedin-icon svg,
+.github-icon svg {
+    stroke-width: 1.8;
+}
+
+/* Arrange the contact label and details. */
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+    flex: 1;
+}
+
+/* Style labels such as LinkedIn and GitHub. */
+.contact-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+/* Style the secondary contact information. */
+.contact-value {
+    color: var(--muted, #c5afb7);
+    font-size: clamp(0.78rem, 2vw, 0.9rem);
+    overflow-wrap: anywhere;
+}
+
+/* Style the arrow at the right of each card. */
+.contact-arrow {
+    color: var(--muted, #c5afb7);
+    font-size: 1.2rem;
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Animate the arrow when a card is hovered. */
+.contact-link:hover .contact-arrow {
+    color: var(--rose, #c46a83);
+    transform: translate(2px, -2px);
+}
+
+/* ==========================================
+   FLOATING MESSAGE FORM OVERLAY
+========================================== */
+
+/* Cover the page with a dark overlay when the
+   message form is open. */
+.message-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background: rgba(10, 7, 9, 0.78);
+    backdrop-filter: blur(6px);
+}
+
+/* Keep the overlay hidden until opened. */
+.message-overlay[hidden] {
+    display: none;
+}
+
+/* Style the floating form panel. */
+.message-panel {
+    width: min(100%, 34rem);
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: clamp(1.25rem, 4vw, 2rem);
+    color: var(--ink);
+    background: linear-gradient(145deg, #2b1d25, #21191e);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+/* Align the form heading and close button. */
+.message-form-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Style the small uppercase form heading. */
+.message-form-eyebrow {
+    margin: 0 0 0.5rem;
+    color: var(--olive-dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+/* Style the message form title. */
+.message-form-header h2 {
+    margin: 0;
+    color: #f1b2c0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.7rem, 5vw, 2.3rem);
+    font-weight: 500;
+}
+
+/* Style the introductory text in the form. */
+.message-form-intro {
+    margin: 0.5rem 0 0;
+    color: var(--muted);
+}
+
+/* Style the close button. */
+.message-close {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 1.7rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* Highlight the close button on hover. */
+.message-close:hover {
+    color: var(--rose);
+    border-color: var(--rose);
+}
+
+/* Arrange the form fields vertically. */
+#contactMessageForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+/* Style the form labels. */
+#contactMessageForm label {
+    margin-top: 0.45rem;
+    color: var(--ink);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Style the input fields and message box. */
+#contactMessageForm input,
+#contactMessageForm textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    color: var(--ink);
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font: inherit;
+}
+
+/* Allow the message box to be resized vertically. */
+#contactMessageForm textarea {
+    resize: vertical;
+    min-height: 8rem;
+}
+
+/* Highlight a field when selected. */
+#contactMessageForm input:focus,
+#contactMessageForm textarea:focus {
+    outline: 2px solid var(--rose);
+    outline-offset: 2px;
+    border-color: var(--rose);
+}
+
+/* Style placeholder text. */
+#contactMessageForm input::placeholder,
+#contactMessageForm textarea::placeholder {
+    color: #aa929b;
+}
+
+/* Style the send button. */
+.message-send-button {
+    margin-top: 0.75rem;
+    padding: 0.95rem 1rem;
+    color: #ffffff;
+    background: linear-gradient(
+        135deg,
+        var(--burgundy),
+        var(--rose)
+    );
+    border: 1px solid var(--rose);
+    border-radius: 4px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        filter 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Add a subtle hover effect to the send button. */
+.message-send-button:hover {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+}
+
+/* Make keyboard focus visible. */
+.message-close:focus-visible,
+.message-send-button:focus-visible {
+    outline: 2px solid var(--olive-dark);
+    outline-offset: 3px;
+}
+
+/* ==========================================
+   RESPONSIVE CONTACT PAGE
+========================================== */
+
+/* Adjust the contact cards and form on small screens. */
+@media (max-width: 30rem) {
+    .contact-link {
+        gap: 0.75rem;
+    }
+
+    .contact-icon {
+        width: 2.4rem;
+    }
+
+    .message-panel {
+        padding: 1.15rem;
+    }
+}
+
+/* Respect visitors' reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+    .contact-link,
+    .contact-arrow {
+        transition: none;
+    }
+
+    .contact-link:hover,
+    .contact-link:hover .contact-arrow {
+        transform: none;
+    }
+
+    .message-close,
+    .message-send-button {
+        transition: none;
+    }
+}
+
+
+    </style>
   <!-- Use the same internal CSS as the homepage to keep the design consistent. -->
     <!-- Shared external stylesheet for all pages. -->
   <link rel="stylesheet" href="styles.css">
