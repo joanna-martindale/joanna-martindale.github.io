@@ -1,8 +1,8 @@
 # Joanna Martindale — Personal Website
 
 Welcome to my personal website, **My Little Corner**. This website introduces me, showcases my experience and interests, and provides a way to get in touch with me.
-<br><br>**Link to My Little Corner**: _paste here_ <br><br>
-The project is built using HTML, CSS and JavaScript, with a responsive design and interactive elements. It is a work in progress, and I plan to continue developing its content and features.
+<br><br>**Link to My Little Corner**: joanna-martindale.github.io <br><br>
+The project is built using HTML, an external CSS stylesheet and JavaScript, with a responsive design and interactive elements. It is a work in progress, and I plan to continue developing its content and features.
 
 ## Table of Contents
 
@@ -38,23 +38,25 @@ The website uses a dark colour scheme with burgundy, rose and olive accents, alo
 
 ## Pages and File Structure
 
-The project contains a homepage and five additional HTML pages.
+The project contains a homepage and four additional HTML pages, with a shared external CSS stylesheet.
 
 | File | Purpose |
 |---|---|
 | `index.html` | Homepage introducing the website and providing navigation to the other sections. |
-| `Page1.html` | About Me page containing my introduction, biography and academic achievements. |
-| `Page2.html` | Experience page displaying clickable experience cards and pop-up descriptions. |
-| `Page3.html` | Interests and Creative Pursuits page, featuring an interactive layout of interests and their descriptions. |
-| `Page4.html` | Contact page containing contact links and a floating message form. |
-| `Page5.html` | Additional page currently containing placeholder content and intended to be developed further. |
-| `Joanna_Martindale_CV.pdf` | Suggested filename for the CV PDF, if included in the repository. |
-| `joanna.jpg` | Example filename for the profile photograph; use the actual filename referenced by the HTML. |
+| `About Me.html` | About Me page containing my introduction, biography and academic achievements. |
+| `Experience.html` | Experience page displaying clickable experience cards and pop-up descriptions. |
+| `Interests and Creative Pursuits.html` | Interests page featuring interactive cards and descriptions of my interests. |
+| `Contact.html` | Contact page containing contact links and a floating message form. |
+| `styles.css` | External stylesheet containing shared styling and page-specific CSS rules. |
+| `Joanna_Martindale_CV.pdf` | My CV, linked to open in a separate browser tab. |
+| `joanna.jpg` | My profile photograph. |
 | `README.md` | Project documentation. |
 
-The HTML files contain their own internal CSS, and pages that require interactive functionality also include JavaScript.
+The HTML files link to the external styles.css file for their styling. This keeps the CSS organised in one place and avoids duplicating CSS across HTML files. This makes maintenance easier.
 
-**Note:** The CV and image filenames above are examples of a recommended project structure. Ensure they match the actual filenames used in your HTML code and repository.
+The HTML pages also contain JavaScript where required for interactive functionality.
+
+**Note:** Filenames, spaces and capitalisation must match the actual files in the repository and the paths referenced in the HTML code. GitHub Pages is case-sensitive.
 
 ## Technologies Used
 
@@ -77,7 +79,7 @@ CSS controls the appearance and layout of the website. It is used for:
 - Media queries for smaller screens.
 - Reduced-motion preferences.
 
-CSS is included in the individual HTML files using internal `<style>` elements.
+The website's CSS is maintained in the external `styles.css` file, which is linked from each HTML page. The stylesheet contains shared styles and page-specific rules to maintain a consistent visual theme while allowing each page to retain its individual layout.
 
 ### JavaScript
 
@@ -163,18 +165,19 @@ GitHub Pages can host this website as a static website.
 
 ### Important Deployment Considerations
 
-- **Use relative file paths.** Links to local files on your computer will not work for visitors to the published website.
-- **Check filename capitalisation.** GitHub Pages runs on a case-sensitive environment, so `Page1.html` and `page1.html` may be treated as different files.
-- **Include all required assets.** Images and the CV PDF must be uploaded to the repository if the website references them.
-- **Check every navigation link.** Verify that each tab opens the intended page on the published website.
-- **Test the contact form.** Confirm that the Formspree endpoint is configured and that submissions are received as expected.
+- **Use relative file paths.** Links to files on your computer will not work for visitors to the published website.
+- **Check filename capitalisation and spaces.** GitHub Pages is case-sensitive. For example, `About Me.html` is different from about-me.html.
+- **Include all required files.** Upload every HTML page, styles.css, the profile photograph and the CV PDF referenced by the website.
+- **Check every stylesheet link.** Every HTML page should link to the correct stylesheet.css file.
+- **Check every navigation link** Verify that each tab opens the intended page on the published website.
+- **Test the contact form** Confirm that the Formspree endpoint is configured and submissions are received as expected.
 
 ## Future Improvements
 
 Potential improvements include:
 
 - Replacing remaining placeholder content with final material.
-- Refining the CV page and ensuring the CV opens correctly in a separate tab.
+- Continuing to refine the website's content, accessibility and interactive features.
 - Further improving keyboard navigation and accessibility.
 - Adding more projects and examples of technical work.
 - Continuing to refine responsive layouts and interactive effects.
