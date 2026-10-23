@@ -1,7 +1,7 @@
 # Joanna Martindale — Personal Website
 
 Welcome to my personal website, **My Little Corner**. This website introduces me, showcases my experience and interests, and provides a way to get in touch with me.
-<br><br>**Link to My Little Corner**: joanna-martindale.github.io <br><br>
+<br><br>**Link to My Little Corner**: https://joanna-martindale.github.io <br><br>
 The project is built using HTML, an external CSS stylesheet and JavaScript, with a responsive design and interactive elements. It is a work in progress, and I plan to continue developing its content and features.
 
 ## Table of Contents
