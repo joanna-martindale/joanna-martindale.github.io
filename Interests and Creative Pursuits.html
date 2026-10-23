@@ -228,12 +228,16 @@
     color: var(--muted);
     font-size: 2rem;
     cursor: pointer;
+
+  /* Make the rotation and colour change smooth. */
+  transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
 }
 
 /* Highlight the close button on hover and keyboard focus. */
 .interest-close:hover,
 .interest-close:focus-visible {
     color: var(--rose);
+  transform: rotate(90deg);
 }
 
 /* Style the selected interest heading. */
