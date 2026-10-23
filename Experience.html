@@ -15,6 +15,442 @@
   <!-- Use the same internal CSS as the homepage to keep the design consistent. -->
     <!-- Shared external stylesheet for all pages. -->
   <link rel="stylesheet" href="styles.css">
+
+  
+<style>
+    /* Preserve the homepage background and vertical page layout. */
+    body {
+      background:
+        radial-gradient(ellipse at 12% 12%, rgba(167, 71, 96, .22), transparent 38%),
+        radial-gradient(ellipse at 88% 88%, rgba(137, 144, 100, .16), transparent 40%),
+        linear-gradient(135deg, #171316 0%, #21181e 52%, #1b1e17 100%);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Keep the homepage header spacing and responsive padding. */
+    header {
+      gap: 20px;
+    }
+
+    /* Centre the main content and let it fill the space above the footer. */
+    main {
+      width: min(1000px, 100%);
+      margin: auto;
+      padding: 54px 28px 72px;
+      flex: 1;
+      display: block;
+    }
+
+    /* Create the main welcome panel. */
+    .hero {
+      width: 100%;
+      padding: clamp(32px, 7vw, 76px) clamp(20px, 5vw, 64px);
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(145deg, rgba(39, 27, 33, .96), rgba(29, 27, 25, .96));
+      box-shadow: 0 22px 55px rgba(0, 0, 0, .28);
+    }
+
+    /* Style the small uppercase label above the heading. */
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--olive-dark);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    /* Give the main heading its editorial serif style. */
+    h1 {
+      margin: 0;
+      color: #f1b2c0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.7rem, 7vw, 5.1rem);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -.045em;
+    }
+
+    /* Keep the introduction readable and centred. */
+    .intro {
+      max-width: 590px;
+      margin: 22px auto 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.12rem);
+      line-height: 1.8;
+    }
+
+    /* Add the gradient divider below the introduction. */
+    .accent-line {
+      width: 66px;
+      height: 3px;
+      margin: 28px auto;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--rose), #e6a9b6, var(--olive));
+    }
+
+    /* Arrange the five homepage navigation links in a grid. */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    /* Style the homepage navigation links. */
+    .nav-button {
+      display: flex;
+      min-height: 58px;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 12px;
+      border: 1px solid #62404a;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #38242d, #2b2528);
+      color: #f3c6d0;
+      font-size: .95rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    /* Lift and brighten a homepage navigation link on hover. */
+    .nav-button:hover {
+      transform: translateY(-3px);
+      border-color: var(--rose);
+      background: linear-gradient(135deg, #4a2935, #343629);
+    }
+
+    /* Keep keyboard focus visible on homepage navigation links. */
+    .nav-button:focus-visible {
+      outline: 2px solid var(--olive-dark);
+      outline-offset: 3px;
+    }
+
+    /* ==========================================
+       EXPERIENCE SECTION — STACKED OBLONG CARDS
+       ========================================== */
+
+    /* Set the spacing around the Experience section. */
+    .experience-section {
+      margin-top: clamp(0.25rem, 1vw, 0.75rem);
+      padding: 30px 0 70px;
+      scroll-margin-top: 30px;
+    }
+
+    /* Centre the Experience heading. */
+    .experience-heading {
+      margin: 0 0 14px;
+      color: var(--pink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 500;
+      letter-spacing: -.035em;
+      text-align: center;
+    }
+
+    /* Add a gradient accent below the Experience heading. */
+    .experience-heading-line {
+      width: 76px;
+      height: 3px;
+      margin: 0 auto 42px;
+      background: linear-gradient(90deg, var(--rose), #e6a9b6, var(--olive));
+    }
+
+    /* Centre the stack of Experience cards. */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: min(820px, 100%);
+      margin: 0 auto;
+    }
+
+    /* Style each Experience item as a horizontal oblong card. */
+    .experience-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      width: 100%;
+      min-height: 92px;
+      padding: 22px 30px;
+      border: 1px solid rgba(209, 106, 131, .45);
+      border-radius: 999px;
+      background: linear-gradient(110deg, rgba(72, 37, 50, .94), rgba(37, 34, 33, .96));
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      box-shadow:
+        0 0 24px rgba(209, 106, 131, .08),
+        inset 0 0 18px rgba(209, 106, 131, .025);
+      transition:
+        opacity .45s ease,
+        transform .45s ease,
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+    }
+
+    /* Brighten and lift cards on hover. */
+    .experience-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--pink);
+      background: linear-gradient(110deg, rgba(91, 43, 60, .98), rgba(43, 42, 34, .98));
+      box-shadow:
+        0 0 30px rgba(209, 106, 131, .18),
+        0 0 14px rgba(137, 144, 100, .08);
+    }
+
+    /* Make keyboard focus visible on Experience cards. */
+    .experience-card:focus-visible {
+      outline: 2px solid var(--olive-light);
+      outline-offset: 5px;
+    }
+
+    /* Group the Experience title and its supporting label. */
+    .experience-card-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    /* Style each Experience title. */
+    .experience-title {
+      color: var(--pink);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 750;
+      line-height: 1.3;
+    }
+
+    /* Style the invitation to open a card. */
+    .experience-hint {
+      color: var(--olive-light);
+      font-size: .82rem;
+      letter-spacing: .025em;
+    }
+
+    /* Style the arrow on each card. */
+    .experience-arrow {
+      flex: 0 0 auto;
+      color: var(--olive-light);
+      font-size: 1.5rem;
+      transition: transform .25s ease, color .25s ease;
+    }
+
+    /* Move the arrow slightly on hover. */
+    .experience-card:hover .experience-arrow {
+      color: var(--pink);
+      transform: translateX(4px);
+    }
+
+    /* Initially hide cards that use the scroll-reveal effect. */
+    .experience-card.reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    /* Reveal cards when JavaScript marks them as visible. */
+    .experience-card.reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hide cards again when they leave the viewport. */
+    .experience-card.reveal-on-scroll:not(.is-visible) {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    /* ==========================================
+       EXPERIENCE DESCRIPTION POP-UP
+       ========================================== */
+
+    /* Cover the page with an overlay when a card opens. */
+    .experience-modal-backdrop {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(10, 8, 10, .76);
+      -webkit-backdrop-filter: blur(9px);
+      backdrop-filter: blur(9px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .3s ease, visibility .3s ease;
+    }
+
+    /* Show the overlay when the pop-up is open. */
+    .experience-modal-backdrop.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    /* Style and constrain the pop-up panel. */
+    .experience-modal {
+      position: relative;
+      width: min(620px, 100%);
+      max-height: min(78vh, 680px);
+      overflow-y: auto;
+      padding: clamp(30px, 6vw, 52px);
+      border: 1px solid rgba(209, 106, 131, .65);
+      border-radius: 18px;
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(167, 71, 96, .22), transparent 55%),
+        linear-gradient(145deg, #2a1d24, #1c1b18);
+      box-shadow:
+        0 0 55px rgba(209, 106, 131, .19),
+        0 24px 80px rgba(0, 0, 0, .45);
+      transform: translateY(16px) scale(.985);
+      transition: transform .3s ease;
+    }
+
+    /* Animate the pop-up into position. */
+    .experience-modal-backdrop.is-open .experience-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    /* Position the close button in the top-right corner. */
+    .experience-modal-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      border: 1px solid rgba(209, 106, 131, .4);
+      border-radius: 50%;
+      background: rgba(23, 19, 22, .7);
+      color: var(--pink);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    /* Add hover feedback to the close button. */
+    .experience-modal-close:hover {
+      background: rgba(167, 71, 96, .35);
+      transform: rotate(90deg);
+    }
+
+    /* Keep keyboard focus visible on the close button. */
+    .experience-modal-close:focus-visible {
+      outline: 2px solid var(--olive-light);
+      outline-offset: 3px;
+    }
+
+    /* Style the small label above the pop-up title. */
+    .experience-modal-kicker {
+      margin: 0 0 14px;
+      color: var(--olive-light);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    /* Style the selected Experience title in the pop-up. */
+    .experience-modal-title {
+      margin: 0 36px 22px 0;
+      color: var(--pink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 500;
+      line-height: 1.15;
+    }
+
+    /* Make the Experience description easy to read. */
+    .experience-modal-description {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.85;
+      white-space: pre-line;
+    }
+
+    /* Prevent background scrolling while the pop-up is open. */
+    body.experience-modal-open {
+      overflow: hidden;
+    }
+
+    /* Adjust the layout for tablets and smaller screens. */
+    @media (max-width: 720px) {
+      header {
+        padding: 22px 20px;
+      }
+
+      .header-note {
+        display: none;
+      }
+
+      main {
+        padding: 34px 18px 48px;
+      }
+
+      .nav-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav-button:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    /* Make the Experience layout more compact on small phones. */
+    @media (max-width: 520px) {
+      .experience-section {
+        margin-top: 76px;
+        padding-bottom: 45px;
+      }
+
+      .experience-heading-line {
+        margin-bottom: 30px;
+      }
+
+      .experience-list {
+        gap: 14px;
+      }
+
+      .experience-card {
+        min-height: 82px;
+        padding: 18px 22px;
+        border-radius: 28px;
+      }
+
+      .experience-modal-backdrop {
+        padding: 16px;
+      }
+
+      .experience-modal {
+        max-height: 82vh;
+        padding: 34px 24px;
+        border-radius: 14px;
+      }
+    }
+
+    /* Respect reduced-motion preferences for Experience animations. */
+    @media (prefers-reduced-motion: reduce) {
+      .experience-card,
+      .experience-modal-backdrop,
+      .experience-modal,
+      .experience-arrow,
+      .experience-modal-close {
+        transition: none;
+      }
+    }
+</style>
+
 </head>
 <body class="page-experience">
   <!-- Repeat the shared header so every page feels part of the same website. -->
