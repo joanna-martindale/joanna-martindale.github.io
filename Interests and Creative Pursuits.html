@@ -320,6 +320,7 @@
 
 </head>
 <body class="page-interests">
+  
   <!-- Repeat the shared header so every page feels part of the same website. -->
   <header>
     <!-- This link returns visitors to the homepage. -->
@@ -582,12 +583,21 @@ function openInterest(key) {
     // the overlay is now visible to assistive technologies.
     overlay.setAttribute("aria-hidden", "false");
 
-    // Prevent the page behind the modal from scrolling while it is open.
+    // Prevent the page behind the modal from scrolling.
     document.body.style.overflow = "hidden";
 
-    // Move keyboard focus to the modal so keyboard users can scroll it.
+    // Make the background unavailable while the modal is open.
+    document.querySelectorAll(
+        "body > header, body > .interests-intro, body > main, body > footer"
+    ).forEach(element => {
+        element.inert = true;
+    });
+
+    // Move keyboard focus into the modal.
     const modal = document.querySelector(".interest-modal");
     modal.focus();
+
+   
 }
 
 
@@ -607,6 +617,14 @@ function closeInterest() {
 
     // Restore the page's normal scrolling behaviour.
     document.body.style.overflow = "";
+  
+    // Make the background available again after closing the modal.
+    document.querySelectorAll(
+        "body > header, body > .interests-intro, body > main, body > footer"
+    ).forEach(element => {
+        element.inert = false;
+    });
+
 
     // Return focus to the element that was selected before the modal opened.
     if (previousFocus) {
