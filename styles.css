@@ -41,6 +41,8 @@ body {
     radial-gradient(ellipse at 88% 88%, rgba(137, 144, 100, 0.16), transparent 40%),
     linear-gradient(135deg, #171316 0%, #21181e 52%, #1b1e17 100%);
   /* Blend subtle burgundy and olive glows into the dark base. */
+  display: flex;
+  flex-direction: column;
 }
 
 /* 4. Shared header layout. */
