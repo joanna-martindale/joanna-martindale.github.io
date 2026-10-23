@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- Declare this file as an HTML5 document. -->
+<html lang="en">
+<!-- Set the page language to English for browsers and assistive technology. -->
+<head>
+  <!-- Allow the page to display a wide range of characters correctly. -->
+  <meta charset="UTF-8">
+  <!-- Make the layout adapt to the width of mobile and desktop screens. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Provide a short description for browser previews and search engines. -->
+  <meta name="description" content="Homepage for Joanna Martindale's personal website to share her projects, interests and achievements">
+  <!-- Set the text shown in the browser tab. -->
+  <title>Homepage | Joanna Martindale | STEAM Enthusiast and Gap Year Student</title>
+
+  <!-- Keep all page styling inside this file, as requested. -->
+    <!-- Shared external stylesheet for all pages. -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-home">
+  <!-- The header contains the site name and a short supporting note. -->
+  <header>
+    <!-- Link the site name back to the homepage. -->
+    <a class="brand" href="index.html">My Little Corner</a>
+    <!-- Give visitors a little context without competing with the main heading. -->
+    <span class="header-note">A personal space to explore</span>
+  </header>
+
+  <!-- Main contains the primary content of the page. -->
+  <main>
+    <!-- The hero section groups the welcome message and navigation together. -->
+    <section class="hero" aria-labelledby="welcome-title">
+      <!-- A small introductory label above the main heading. -->
+      <p class="eyebrow">A little introduction</p>
+      <!-- The main page heading; the line break splits it over two lines. -->
+      <h1 id="welcome-title">Welcome to my<br>corner of the internet.</h1>
+      <!-- A decorative gradient divider; hidden from screen readers because it is visual only. -->
+      <div class="accent-line" aria-hidden="true"></div>
+      <!-- Brief welcome text that can be replaced with your own introduction later. -->
+      <p class="intro">
+        A space for my interests, ideas and everything I’m working on.
+        Choose a section below to explore — there’s more to come.
+      </p>
+
+      <!-- Navigation landmark that groups the five links to the future sections. -->
+      <nav class="nav-grid" aria-label="Main navigation">
+        <!-- Link to the 'About Me' page. -->
+        <a class="nav-button" href="About Me.html">About Me <span aria-hidden="true">↗</span></a>
+        <!-- Link to the 'Experience' page. -->
+        <a class="nav-button" href="Experience.html"> Experience <span aria-hidden="true">↗</span></a>
+        <!-- Link to the 'Interests and Creative Pursuits' page. -->
+        <a class="nav-button" href="Interests and Creative Pursuits.html">Interests and Creative Pursuits <span aria-hidden="true">↗</span></a>
+        <!-- Link to the Contact' page. -->
+        <a class="nav-button" href="Contact.html">Contact Me <span aria-hidden="true">↗</span></a>
+        <!-- Link to CV (opens in separate tab) -->
+        <a class="nav-button" href="Joanna_Martindale_CV.pdf" target = "_blank" rel = "noopener noreferrer">CV<span aria-hidden="true">↗</span></a>
+    
+      <!--target="_blank" opens the cv in a separate tab and rel=...noreferrer adds a security and privac safeguard and href="CV..." points to file path of my CV--> 
+      </nav>
+    </section>
+  </main>
+
+  <!-- A simple footer at the bottom of the page. -->
+  <footer>Made with care · A work in progress</footer>
+</body>
+</html>
