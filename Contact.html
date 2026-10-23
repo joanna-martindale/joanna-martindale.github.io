@@ -367,10 +367,71 @@ main.contact-page {
 }
 
 
+/* Explain which fields are required. */
+.required-note {
+    margin: 0 0 0.5rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.required-indicator {
+    color: #f1b2c0;
+    font-weight: 700;
+}
+
+/* Clearly identify invalid fields. */
+#contactMessageForm input[aria-invalid="true"],
+#contactMessageForm textarea[aria-invalid="true"] {
+    border-color: #ff8b8b;
+    outline: 1px solid #ff8b8b;
+}
+
+/* Display a warning directly beneath an invalid field. */
+#contactMessageForm .field-error {
+    margin: -0.35rem 0 0.25rem;
+    color: #ffaaaa;
+    font-size: 0.85rem;
+    line-height: 1.45;
+}
+
+/* Hide empty error messages to avoid unnecessary spacing. */
+#contactMessageForm .field-error:empty {
+    display: none;
+}
+
+/* Style submission success and failure messages. */
+#contactMessageForm .form-status {
+    margin: 0.5rem 0;
+    padding: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+#contactMessageForm .form-status:empty {
+    display: none;
+}
+
+#contactMessageForm .form-status.success {
+    color: #bce8c8;
+}
+
+#contactMessageForm .form-status.error {
+    color: #ffaaaa;
+}
+
+/* Indicate that submission is in progress. */
+.message-send-button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+    transform: none;
+}
+
     </style>
   
     <!-- Shared external stylesheet for all pages. -->
   <link rel="stylesheet" href="styles.css">
+
+  
 </head>
 <body class="page-contact">
   <!-- Repeat the shared header so every page feels part of the same website. -->
