@@ -183,20 +183,29 @@ main.contact-page {
     display: none;
 }
 
-/* Style the floating form panel. */
+
+/* Style the floating contact form panel. */
 .message-panel {
     box-sizing: border-box;
-    width: min(100%, 34rem);
+    width: 100%;
+    max-width: 34rem;
+
     max-height: calc(100vh - 2rem);
-    max-height: calc(100dvh - 2rem)
+    max-height: calc(100dvh - 2rem);
+
     overflow-y: auto;
-    padding: clamp(1.25rem, 4vw, 2rem);
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+
+    padding: clamp(1rem, 4vw, 2rem);
+
     color: var(--ink);
     background: linear-gradient(145deg, #2b1d25, #21191e);
     border: 1px solid var(--line);
     border-radius: 10px;
     box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
 }
+
 
 /* Align the form heading and close button. */
 .message-form-header {
