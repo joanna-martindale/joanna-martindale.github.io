@@ -15,7 +15,103 @@
   <!-- Keep all page styling inside this file, as requested. -->
     <!-- Shared external stylesheet for all pages. -->
   <link rel="stylesheet" href="styles.css">
+
+  
+<style>
+    /* Centre the main content and let it fill the space between header and footer. */
+    main {
+      width: min(1000px, 100%); /* Prevent the content from becoming too wide. */
+      margin: auto; /* Centre the main section horizontally and use available vertical space. */
+      padding: 54px 28px 72px; /* Add breathing room around the main panel. */
+      flex: 1; /* Allow the main section to grow and push the footer down. */
+      display: grid; /* Use grid to position the hero panel. */
+      place-items: center; /* Centre the hero panel horizontally and vertically. */
+    }
+
+    /* Create the main content panel with straighter edges and restrained depth. */
+    .hero {
+      width: 100%; /* Let the panel use the available main-section width. */
+      padding: clamp(32px, 7vw, 76px) clamp(20px, 5vw, 64px); /* Scale panel padding to the screen size. */
+      text-align: center; /* Centre the welcome text and navigation. */
+      border: 1px solid var(--line); /* Outline the panel with a subtle burgundy border. */
+      border-radius: 8px; /* Use a small radius for a sharper, less button-like look. */
+      background: linear-gradient(145deg, rgba(39, 27, 33, .96), rgba(29, 27, 25, .96)); /* Give the panel a very subtle dark gradient. */
+      box-shadow: 0 22px 55px rgba(0, 0, 0, .28); /* Add depth without a bright or heavy glow. */
+    }
+
+    /* Give the main heading an editorial serif style. */
+    h1 {
+      margin: 0; /* Remove default heading margins so spacing is controlled explicitly. */
+      color: #f1b2c0; /* Use a soft rosy pink for the main heading. */
+      font-family: Georgia, "Times New Roman", serif; /* Contrast the heading with the sans-serif body text. */
+      font-size: clamp(2.7rem, 7vw, 5.1rem); /* Scale the heading across mobile and desktop. */
+      font-weight: 500; /* Keep the heading elegant rather than overly heavy. */
+      line-height: 1.05; /* Keep multi-line heading lines close together. */
+      letter-spacing: -.045em; /* Slightly tighten the heading letters. */
+    }
+
+    /* Set a comfortable reading width and line spacing for the introduction. */
+    .intro {
+      max-width: 590px; /* Prevent paragraphs from stretching across the whole panel. */
+      margin: 22px auto 0; /* Add space above and centre the paragraph. */
+      color: var(--muted); /* Use muted text to keep the heading as the focal point. */
+      font-size: clamp(1rem, 2vw, 1.12rem); /* Adjust text size slightly for different screens. */
+      line-height: 1.8; /* Make the paragraph easy to read. */
+    }
+
+    /* Arrange the five navigation links in one row on wider screens. */
+    .nav-grid {
+      display: grid; /* Use CSS Grid for consistent navigation columns. */
+      grid-template-columns: repeat(5, minmax(0, 1fr)); /* Create five equal-width columns. */
+      gap: 12px; /* Add space between the links. */
+      margin-top: 34px; /* Separate the links from the introduction. */
+    }
+
+    /* Make each navigation link feel like a flat, refined menu item rather than a pill button. */
+    .nav-button {
+      display: flex; /* Centre the label within each link. */
+      min-height: 58px; /* Keep links large enough to click comfortably. */
+      align-items: center; /* Centre link text vertically. */
+      justify-content: center; /* Centre link text horizontally. */
+      padding: 14px 12px; /* Add internal space around the label. */
+      border: 1px solid #62404a; /* Outline each link with a muted burgundy border. */
+      border-radius: 4px; /* Use nearly square corners for a sharper appearance. */
+      background: linear-gradient(135deg, #38242d, #2b2528); /* Give the link a subtle dark burgundy gradient. */
+      color: #f3c6d0; /* Use pale pink for link text. */
+      font-size: .95rem; /* Keep link labels easy to read. */
+      font-weight: 700; /* Make the link labels clear. */
+      text-decoration: none; /* Remove the default underline. */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .12); /* Add a very subtle shadow beneath each link. */
+      transition: transform .2s ease, border-color .2s ease, background .2s ease; /* Animate hover changes smoothly. */
+    }
+
+    /* Give a navigation link a small lift and brighter outline when hovered. */
+    .nav-button:hover {
+      transform: translateY(-3px); /* Raise the link slightly on hover. */
+      border-color: var(--rose); /* Highlight its border in rose. */
+      background: linear-gradient(135deg, #4a2935, #343629); /* Shift the background toward burgundy and olive. */
+    }
+
+    /* Reflow the homepage layout for tablets and mobile phones. */
+    @media (max-width: 720px) {
+      main {
+        padding: 34px 18px 48px; /* Reduce main spacing on narrow screens. */
+      }
+
+      .nav-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* Display navigation links in two columns. */
+      }
+
+      .nav-button:last-child {
+        grid-column: 1 / -1; /* Let the fifth link span both columns. */
+      }
+    }
+</style>
+
 </head>
+
+  
+  
 <body class="page-home">
   <!-- The header contains the site name and a short supporting note. -->
   <header>
