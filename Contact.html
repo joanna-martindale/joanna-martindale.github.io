@@ -678,57 +678,6 @@ main.contact-page {
   <footer>Made with care · A work in progress</footer>
 
   
-  <!-- Control the floating message form. -->
-  <script>
-    // Find the button that opens the message form.
-    const openMessageFormButton = document.getElementById("openMessageForm");
-
-    // Find the floating form overlay.
-    const messageOverlay = document.getElementById("messageOverlay");
-
-    // Find the button that closes the form.
-    const closeMessageFormButton = document.getElementById("closeMessageForm");
-
-    // Remember which element was focused before the form opened.
-    let previousFocusedElement = null;
-
-    // Open the form when the visitor clicks the message card.
-    openMessageFormButton.addEventListener("click", function () {
-      previousFocusedElement = document.activeElement;
-
-      // Remove the hidden attribute to display the floating form.
-      messageOverlay.hidden = false;
-
-      // Move keyboard focus to the name field.
-      document.getElementById("senderName").focus();
-    });
-
-    // Close the form when the visitor clicks the close button.
-    closeMessageFormButton.addEventListener("click", closeMessageForm);
-
-    // Close the form when the visitor clicks the dark area outside the panel.
-    messageOverlay.addEventListener("click", function (event) {
-      if (event.target === messageOverlay) {
-        closeMessageForm();
-      }
-    });
-
-    // Close the form when the visitor presses Escape.
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && !messageOverlay.hidden) {
-        closeMessageForm();
-      }
-    });
-
-    // Hide the form and return focus to the button that opened it.
-    function closeMessageForm() {
-      messageOverlay.hidden = true;
-
-      if (previousFocusedElement) {
-        previousFocusedElement.focus();
-      }
-    }
-  </script>
 
   <script src="contact.js" defer></script>
 
