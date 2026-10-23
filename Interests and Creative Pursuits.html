@@ -640,22 +640,72 @@ document.querySelectorAll(".interest-card").forEach(card => {
 =========================================== */
 closeButton.addEventListener("click", closeInterest);
 
+
 /* ==========================================
-   8. CLOSE USING THE ESCAPE KEY
-   Allows keyboard users to close the modal
-   without needing to click the close button.
+   8. HANDLE KEYBOARD NAVIGATION
+   Keep keyboard focus inside the open modal
+   and allow users to close it with Escape.
 =========================================== */
+
 document.addEventListener("keydown", event => {
 
-    // Check that the pressed key is Escape and that
-    // the modal is currently open before closing it.
-    if (
-        event.key === "Escape" &&
-        overlay.classList.contains("is-open")
-    ) {
+    // Do nothing if the modal is closed.
+    if (!overlay.classList.contains("is-open")) {
+        return;
+    }
+
+    // Close the modal when Escape is pressed.
+    if (event.key === "Escape") {
         closeInterest();
+        return;
+    }
+
+    // Keep keyboard focus inside the modal when Tab is pressed.
+    if (event.key === "Tab") {
+
+        // Find the interactive elements inside the modal.
+        const focusableElements = overlay.querySelectorAll(
+            'button:not([disabled]), a[href], input:not([disabled]), ' +
+            'select:not([disabled]), textarea:not([disabled]), ' +
+            '[tabindex]:not([tabindex="-1"])'
+        );
+
+        // Keep only elements that are currently visible.
+        const focusable = Array.from(focusableElements)
+            .filter(element => element.getClientRects().length > 0);
+
+        // Stop if there are no focusable elements.
+        if (focusable.length === 0) {
+            event.preventDefault();
+            return;
+        }
+
+        const firstElement = focusable[0];
+        const lastElement = focusable[focusable.length - 1];
+
+        // Shift + Tab from the first element moves to the last.
+        if (
+            event.shiftKey &&
+            (
+                document.activeElement === firstElement ||
+                document.activeElement === overlay.querySelector(".interest-modal")
+            )
+        ) {
+            event.preventDefault();
+            lastElement.focus();
+        }
+
+        // Tab from the last element moves to the first.
+        else if (
+            !event.shiftKey &&
+            document.activeElement === lastElement
+        ) {
+            event.preventDefault();
+            firstElement.focus();
+        }
     }
 });
+
 
 </script>
 
