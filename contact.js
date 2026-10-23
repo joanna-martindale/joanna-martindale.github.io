@@ -160,6 +160,87 @@ function closeMessageForm() {
     }
 }
 
+// Define the actions required to close the floating form.
+function closeMessageForm() {
+
+    // Keep the form open while a message is being submitted.
+    if (isSubmitting) return;
+
+    // Hide the overlay and floating form.
+    messageOverlay.hidden = true;
+
+    // Return keyboard focus to the element that opened the form.
+    if (previousFocusedElement) {
+        previousFocusedElement.focus();
+    }
+}
+
+
+ 
+// ==========================================
+// KEEP KEYBOARD FOCUS INSIDE THE MODAL
+// ==========================================
+
+messageOverlay.addEventListener("keydown", function (event) {
+
+    // Only handle Tab navigation while the modal is open.
+    if (event.key !== "Tab" || messageOverlay.hidden) {
+        return;
+    }
+
+    // Find the dialog inside the overlay.
+    const dialog = messageOverlay.querySelector('[role="dialog"]');
+
+    if (!dialog) {
+        return;
+    }
+
+    // Find visible, enabled elements that can receive keyboard focus.
+    const focusableElements = Array.from(
+        dialog.querySelectorAll(
+            'a[href], button:not(:disabled), input:not(:disabled), textarea:not(:disabled), select:not(:disabled), [tabindex]:not([tabindex="-1"])'
+        )
+    ).filter(function (element) {
+        return element.getClientRects().length > 0 &&
+               element.getAttribute("aria-hidden") !== "true";
+    });
+
+    // Prevent focus from escaping if no focusable elements exist.
+    if (focusableElements.length === 0) {
+        event.preventDefault();
+        dialog.setAttribute("tabindex", "-1");
+        dialog.focus();
+        return;
+    }
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    // Shift + Tab: wrap backwards from the first element.
+    if (
+        event.shiftKey &&
+        (
+            document.activeElement === firstElement ||
+            !dialog.contains(document.activeElement)
+        )
+    ) {
+        event.preventDefault();
+        lastElement.focus();
+    }
+
+    // Tab: wrap forwards from the last element.
+    else if (
+        !event.shiftKey &&
+        (
+            document.activeElement === lastElement ||
+            !dialog.contains(document.activeElement)
+        )
+    ) {
+        event.preventDefault();
+        firstElement.focus();
+    }
+
+});
 
 // ==========================================
 // DISPLAY FIELD VALIDATION MESSAGES
