@@ -1,0 +1,213 @@
+/*
+  My Little Corner — Shared Stylesheet
+  ------------------------------------
+  Shared design rules for the website's HTML pages.
+  Add this line inside each relevant page's <head>:
+  <link rel="stylesheet" href="styles.css">
+
+  Keep unique page layouts (such as the interests tree, experience
+  cards, About Me layout, and contact form) in page-specific CSS.
+*/
+
+/* 1. Shared colour palette: edit these values to update the theme. */
+:root {
+  --burgundy: #a74760;   /* Main burgundy-rose accent. */
+  --rose: #d16a83;       /* Brighter rose for highlights. */
+  --olive: #899064;      /* Muted olive accent. */
+  --olive-dark: #c0c79a; /* Pale olive for readable accent text. */
+  --blush: #39252e;      /* Deep pink-tinted surface. */
+  --background: #171316; /* Main near-black background. */
+  --panel: #21191e;      /* Slightly lighter panel surface. */
+  --ink: #f7edf0;        /* Main soft off-white text. */
+  --muted: #c1adb4;      /* Secondary text. */
+  --line: #54333e;       /* Subtle burgundy border. */
+}
+
+/* 2. Consistent box sizing across the website. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* Include padding and borders in element dimensions. */
+}
+
+/* 3. Shared page typography and layered dark background. */
+body {
+  margin: 0; /* Remove the browser's default margin. */
+  min-height: 100vh; /* Let short pages fill the viewport. */
+  font-family: "Segoe UI", Arial, sans-serif; /* Use a widely available sans-serif font. */
+  color: var(--ink); /* Apply the main text colour. */
+  background:
+    radial-gradient(ellipse at 12% 12%, rgba(167, 71, 96, 0.22), transparent 38%),
+    radial-gradient(ellipse at 88% 88%, rgba(137, 144, 100, 0.16), transparent 40%),
+    linear-gradient(135deg, #171316 0%, #21181e 52%, #1b1e17 100%);
+  /* Blend subtle burgundy and olive glows into the dark base. */
+}
+
+/* 4. Shared header layout. */
+header,
+.site-header {
+  width: min(1100px, 100%); /* Limit the header width on large screens. */
+  margin: 0 auto; /* Centre the header. */
+  padding: 28px; /* Give the header breathing room. */
+  display: flex; /* Arrange brand, note and navigation flexibly. */
+  align-items: center; /* Align items vertically. */
+  justify-content: space-between; /* Separate items where space permits. */
+  gap: 18px; /* Prevent items from touching. */
+  flex-wrap: wrap; /* Let items wrap on smaller screens. */
+}
+
+/* Shared website wordmark. */
+.brand {
+  color: var(--rose); /* Use the rose accent. */
+  font-size: 0.88rem; /* Keep the wordmark compact. */
+  font-weight: 800; /* Emphasise the brand. */
+  letter-spacing: 0.16em; /* Space out the letters. */
+  text-transform: uppercase; /* Use uppercase lettering. */
+  text-decoration: none; /* Remove the default underline. */
+}
+
+/* Optional short note in the header. */
+.header-note {
+  color: var(--muted); /* Keep the note visually secondary. */
+  font-size: 0.9rem; /* Use compact text. */
+}
+
+/* 5. Shared top navigation tabs. */
+.page-tabs {
+  display: flex; /* Place tabs in a row. */
+  align-items: center; /* Align tabs vertically. */
+  justify-content: flex-end; /* Push tabs right on wider screens. */
+  gap: 8px; /* Separate tabs. */
+  flex-wrap: wrap; /* Allow tabs to wrap. */
+  margin-left: auto; /* Use remaining space to move tabs right. */
+}
+
+/* Default appearance of each navigation link. */
+.page-tabs a {
+  display: inline-block; /* Allow padding and borders. */
+  padding: 10px 15px; /* Make tabs comfortably clickable. */
+  color: var(--muted); /* Use secondary text colour. */
+  text-decoration: none; /* Remove the underline. */
+  font-size: 0.9rem; /* Keep labels compact. */
+  font-weight: 600; /* Make labels clear. */
+  border: 1px solid var(--line); /* Add a subtle outline. */
+  border-radius: 4px; /* Match the site's restrained corner style. */
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  /* Smoothly animate hover and active states. */
+}
+
+/* Hover state for navigation tabs. */
+.page-tabs a:hover {
+  color: var(--ink); /* Increase text contrast. */
+  background: var(--panel); /* Add a dark surface behind the label. */
+  border-color: var(--rose); /* Highlight the outline. */
+}
+
+/* Highlight the current page; use class="active" or aria-current="page". */
+.page-tabs a.active,
+.page-tabs a[aria-current="page"] {
+  color: #ffffff; /* Use bright text for contrast. */
+  background: linear-gradient(135deg, var(--burgundy), var(--rose)); /* Apply the accent gradient. */
+  border-color: var(--rose); /* Emphasise the active outline. */
+  box-shadow: 0 4px 14px rgba(167, 71, 96, 0.25); /* Add a restrained glow. */
+}
+
+/* 6. Shared small uppercase section labels. */
+.eyebrow,
+.section-eyebrow {
+  margin: 0 0 14px; /* Separate the label from following content. */
+  color: var(--olive-dark); /* Use pale olive. */
+  font-size: 0.78rem; /* Keep the label secondary. */
+  font-weight: 800; /* Make the label distinct. */
+  letter-spacing: 0.18em; /* Add letter spacing. */
+  text-transform: uppercase; /* Use uppercase labels. */
+}
+
+/* Shared primary heading typography; page-specific sizes may override this. */
+h1 {
+  color: #f1b2c0; /* Use a soft rosy pink. */
+  font-family: Georgia, "Times New Roman", serif; /* Contrast with body text. */
+  font-weight: 500; /* Keep the heading elegant. */
+}
+
+/* Shared decorative divider. */
+.accent-line {
+  width: 66px; /* Set the divider width. */
+  height: 3px; /* Keep it slim. */
+  margin: 28px auto; /* Centre it and add vertical space. */
+  border-radius: 2px; /* Soften the corners. */
+  background: linear-gradient(90deg, var(--rose), #e6a9b6, var(--olive)); /* Blend the accent colours. */
+}
+
+/* 7. Shared return/back link. */
+.back-link {
+  display: inline-flex; /* Size the link to its contents. */
+  align-items: center; /* Centre text vertically. */
+  justify-content: center; /* Centre text horizontally. */
+  margin-top: 30px; /* Separate it from the content above. */
+  padding: 12px 20px; /* Make it comfortably clickable. */
+  border: 1px solid var(--rose); /* Use a rose outline. */
+  border-radius: 4px; /* Match navigation corners. */
+  background: linear-gradient(120deg, #482532, #30272a); /* Use a subtle dark gradient. */
+  color: #f5c6d1; /* Keep the label readable. */
+  font-weight: 700; /* Emphasise the link. */
+  text-decoration: none; /* Remove the underline. */
+  transition: transform 0.2s ease, border-color 0.2s ease; /* Animate hover effects. */
+}
+
+/* Subtle hover effect for return links. */
+.back-link:hover {
+  transform: translateY(-2px); /* Lift the link slightly. */
+  border-color: var(--olive-dark); /* Change the border to olive. */
+}
+
+/* 8. Visible keyboard focus for shared navigation links. */
+.page-tabs a:focus-visible,
+.brand:focus-visible,
+.back-link:focus-visible {
+  outline: 2px solid var(--olive-dark); /* Draw a clear focus outline. */
+  outline-offset: 3px; /* Keep the outline away from the element border. */
+}
+
+/* 9. Shared footer styling. */
+footer {
+  padding: 20px 24px 26px; /* Add space around the footer. */
+  color: var(--muted); /* Use secondary text colour. */
+  font-size: 0.82rem; /* Keep footer text small. */
+  text-align: center; /* Centre the footer. */
+}
+
+/* 10. Responsive shared header and navigation for smaller screens. */
+@media (max-width: 700px) {
+  header,
+  .site-header {
+    padding: 22px 20px; /* Reduce header padding on mobile. */
+  }
+
+  .header-note {
+    display: none; /* Hide the optional note to save room. */
+  }
+
+  .page-tabs {
+    justify-content: flex-start; /* Start wrapped tabs at the left. */
+    width: 100%; /* Put navigation on its own row. */
+    margin-left: 0; /* Remove the desktop alignment offset. */
+    gap: 6px; /* Tighten tab spacing. */
+  }
+
+  .page-tabs a {
+    padding: 8px 10px; /* Reduce tab padding. */
+    font-size: 0.82rem; /* Slightly reduce tab label size. */
+  }
+}
+
+/* 11. Respect the visitor's reduced-motion preference. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important; /* Make transitions effectively instant. */
+    animation-duration: 0.01ms !important; /* Make animations effectively instant. */
+    scroll-behavior: auto !important; /* Disable smooth scrolling where set. */
+  }
+}
