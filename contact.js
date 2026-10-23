@@ -116,18 +116,6 @@ closeMessageFormButton.addEventListener(
     closeMessageForm
 );
 
-
-// Close the form when the visitor clicks outside the form itself.
-messageOverlay.addEventListener("click", function (event) {
-
-    // Check that the click occurred on the overlay rather than
-    // inside the floating contact form.
-    if (event.target === messageOverlay) {
-        closeMessageForm();
-    }
-});
-
-
 // Allow the visitor to close the form using the Escape key.
 document.addEventListener("keydown", function (event) {
 
