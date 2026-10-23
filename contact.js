@@ -501,7 +501,7 @@ contactForm.addEventListener(
             // email has been delivered to their inbox.
             showFormStatus(
                 "Thank you for getting in touch! Your message " +
-                "has been submitted successflly, and I appreciate your interest" +
+                "has been submitted successfully, and I appreciate your interest" +
                 "Please wait patiently " +
                 "while I review your message and get back to you. " +
                 "I appreciate your patience.",
