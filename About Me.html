@@ -14,6 +14,236 @@
   <!-- All styling is kept inside this file, so no separate CSS file is needed. -->
     <!-- Shared external stylesheet for all pages. -->
   <link rel="stylesheet" href="styles.css">
+
+  
+<style>
+    /* Centre the main layout and keep it inset from the screen edges. */
+    main {
+      width: min(1180px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: clamp(38px, 7vw, 88px) 0 76px;
+    }
+
+    /* Arrange the introduction and image side by side on desktop. */
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+      align-items: center;
+      gap: clamp(36px, 7vw, 90px);
+    }
+
+    /* Give the text column a gentle entrance animation. */
+    .about-copy {
+      animation: rise-in .8s ease both;
+    }
+
+    /* Make the name the visual focus of the page. */
+    h1 {
+      margin: 0;
+      color: var(--pink);
+      font-size: clamp(2.8rem, 6.6vw, 5.6rem);
+      line-height: 1.02;
+      letter-spacing: -.05em;
+    }
+
+    /* Style the subtitle underneath the name. */
+    .subtitle {
+      margin: 20px 0 0;
+      color: var(--olive-light);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 650;
+      letter-spacing: .015em;
+    }
+
+    /* Keep the biography readable and easy to replace in the HTML. */
+    .bio {
+      max-width: 600px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.85;
+    }
+
+    /* Arrange the achievement cards in a flexible row. */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 38px;
+      max-width: 720px;
+    }
+
+    /* Style each achievement with a restrained glowing edge. */
+    .stat {
+      min-height: 112px;
+      padding: 18px 16px;
+      border: 1px solid rgba(209, 106, 131, .42);
+      border-radius: 3px;
+      background: linear-gradient(145deg, rgba(57, 37, 46, .86), rgba(34, 31, 30, .92));
+      box-shadow: 0 0 24px rgba(209, 106, 131, .10), inset 0 0 18px rgba(209, 106, 131, .035);
+      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+    }
+
+    /* Slightly lift achievement cards when hovered or focused. */
+    .stat:hover {
+      transform: translateY(-4px);
+      border-color: var(--rose);
+      box-shadow: 0 0 28px rgba(209, 106, 131, .18);
+    }
+
+    /* Emphasise the achievement's main number or grade. */
+    .stat-value {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--pink);
+      font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    /* Keep the supporting achievement text readable at small sizes. */
+    .stat-label {
+      color: var(--muted);
+      font-size: .83rem;
+      line-height: 1.45;
+    }
+
+    /* Reserve a space on the right for a future photo or illustration. */
+    .image-frame {
+      position: relative;
+      min-height: 470px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(209, 106, 131, .42);
+      border-radius: 3px;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(209, 106, 131, .18), transparent 58%),
+        linear-gradient(145deg, rgba(54, 36, 44, .88), rgba(30, 31, 26, .94));
+      box-shadow: 0 0 42px rgba(167, 71, 96, .12);
+      animation: rise-in .9s .12s ease both;
+    }
+
+    /* Display the profile photograph without stretching it. */
+    .profile-photo {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Add a thin inset border as a decorative frame detail. */
+    .image-frame::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(192, 199, 154, .25);
+      pointer-events: none;
+    }
+
+    /* Override shared return-link styling for this page's design. */
+    .back-link {
+      margin-top: 34px;
+      padding: 12px 18px;
+      border-color: rgba(209, 106, 131, .65);
+      border-radius: 3px;
+      background: linear-gradient(120deg, rgba(72, 37, 50, .88), rgba(48, 39, 42, .88));
+      color: #f5c6d1;
+      font-size: .92rem;
+      box-shadow: 0 0 22px rgba(209, 106, 131, .08);
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    /* Add a small hover effect to the homepage link. */
+    .back-link:hover {
+      transform: translateY(-2px);
+      border-color: var(--olive-light);
+      box-shadow: 0 0 24px rgba(209, 106, 131, .15);
+    }
+
+    /* Keep the footer aligned with the main content width. */
+    footer {
+      width: min(1180px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 20px 0 28px;
+    }
+
+    /* On medium and smaller screens, stack the image beneath the text. */
+    @media (max-width: 820px) {
+      .site-header,
+      main,
+      footer {
+        width: min(100% - 36px, 680px);
+      }
+
+      .about-layout {
+        grid-template-columns: 1fr;
+        gap: 42px;
+      }
+
+      .image-frame {
+        min-height: 360px;
+      }
+
+      .stats {
+        max-width: none;
+      }
+    }
+
+    /* On narrow phones, stack the achievement cards and tighten spacing. */
+    @media (max-width: 520px) {
+      .site-header {
+        padding: 22px 0;
+      }
+
+      main {
+        padding: 36px 0 54px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .stat {
+        min-height: auto;
+      }
+
+      .image-frame {
+        min-height: 300px;
+      }
+    }
+
+    /* Fade and rise into view when the page loads. */
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Respect visitors who prefer reduced motion. */
+    @media (prefers-reduced-motion: reduce) {
+      .about-copy,
+      .image-frame {
+        animation: none;
+      }
+
+      .stat,
+      .back-link {
+        transition: none;
+      }
+    }
+</style>
+
+  
 </head>
 <body class="page-about">
   <!-- Shared header: the brand links back to the homepage. -->
