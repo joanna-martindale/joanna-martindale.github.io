@@ -638,23 +638,6 @@ document.querySelectorAll(".interest-card").forEach(card => {
 =========================================== */
 closeButton.addEventListener("click", closeInterest);
 
-
-/* ==========================================
-   7. CLOSE WHEN CLICKING OUTSIDE THE BOX
-   Clicking the darkened overlay closes the
-   modal. Clicking inside the description box
-   does not trigger this behaviour.
-=========================================== */
-overlay.addEventListener("click", event => {
-
-    // event.target is the exact element that received the click.
-    // Only close when that element is the overlay itself.
-    if (event.target === overlay) {
-        closeInterest();
-    }
-});
-
-
 /* ==========================================
    8. CLOSE USING THE ESCAPE KEY
    Allows keyboard users to close the modal
