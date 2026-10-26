@@ -1,0 +1,41 @@
+# name = give workflow a recognisable name
+# on = tell GitHub the condition to run he workflow
+# push = runs when you push a commit to GitHub
+# pull_request = runs when pull request is opened or updated
+# workflow_dispatch = add option to run workflow manually
+# jobs = define the task GitHub needs to carry out
+# runs-on = Select the temporary computer that runs the task
+# actions/checkout = Make's your repository files available to the task
+# lychee-action = runs the link checker
+# args = specifies which files Lychee should examine
+
+
+
+# Give the workflow a name shown in GitHub Actions.
+name: Website Link Checker
+
+# Run the checker when changes are pushed,
+# when a pull request is made, or when started manually.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+# Define the work GitHub should perform.
+jobs:
+  check-links:
+    # GitHub provides a temporary computer for this job.
+    runs-on: ubuntu-latest
+
+    # List the steps the computer should perform.
+    steps:
+      # Download a copy of the repository files.
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Check links in the website files.
+      - name: Check website links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Check HTML and Markdown files in the repository.
+          args: --verbose --no-progress "./**/*.html" "./**/*.md"
