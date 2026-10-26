@@ -58,4 +58,4 @@ FILE_ATTRIBUTES = {
 # for a matching file in the repository.
 NON_FILE_SCHEMES = {
     "http", "https", "mailto", "tel",
-   
+}   
