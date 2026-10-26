@@ -33,6 +33,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+        
+      # Check that local files referenced by HTML exist.
+      - name: Check local file references
+        run: python scripts/check_local_files.py
+
       # Check links in the website files.
       - name: Check website links
         uses: lycheeverse/lychee-action@v2
