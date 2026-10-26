@@ -38,4 +38,10 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           # Check HTML and Markdown files in the repository.
-          args: --verbose --no-progress "./**/*.html" "./**/*.md"
+          args: >-
+            --verbose 
+            --no-progress
+            --exclude "formspree\.io"
+            --exclude "linkedin\.com"
+            "./**/*.html"
+            "./**/*.md"
